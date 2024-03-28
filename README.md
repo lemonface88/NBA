@@ -2,7 +2,7 @@
 
 ## Overview
 
-I have been watching the NBA for many years now, and I also collect some basketball cards. I wanted to take a deeper dive into their game statistics and hopefully to find out more about the player and possible trends and play styles. This analysis will look at their recent 50 games.  
+I have been watching the NBA for many years now, and I also collect some basketball cards. I wanted to take a deeper dive into their game statistics and hopefully to find out more about the player and possible trends and play styles. This analysis will look at their recent 50 games.
 
 
 ## File Structure
