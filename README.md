@@ -1,8 +1,10 @@
-# Starter folder
+# NBA
 
 ## Overview
 
 I have been watching the NBA for many years now, and I also collect some basketball cards. I wanted to take a deeper dive into their game statistics and hopefully to find out more about the player and possible trends and play styles. This analysis will look at their recent 50 games.
+
+This analysis will use historical data from the NBA to make predictions about scores from each team and player. 
 
 
 ## File Structure
@@ -18,4 +20,4 @@ The repo is structured as:
 
 
 ## Statement on LLM usage
-No LLM was used for this paper
+No LLMs were used for this paper
