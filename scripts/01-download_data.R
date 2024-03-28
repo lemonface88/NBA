@@ -15,7 +15,8 @@ library(tidyverse)
 
 #### Download data ####
 
-
+politics_datasets <-
+  fromJSON("https://demo.dataverse.org/api/search?q=politics")
 
 
 #### Save data ####
