@@ -3,14 +3,30 @@ title: "Performance of Rookie Can Predict Price of Their RC based Prizm Cards"
 subtitle: "My subtitle if needed"
 author: 
   - Harrison Huang
-thanks: "Code and data are available at: LINK."
+thanks: "Code and data are available at: https://github.com/lemonface88/NBA"
 date: today 
 date-format: long
-abstract: "First sentence. Second sentence. Third sentence. Fourth sentence."
+abstract: "Collecting and investing in cards has been relevant for a while now. There are complex factors that contribute to the price fluxation of these cards. This analysis will use player statistics to create a model to try to grasp possible future price trends of the card. A xxx model was used in this analysis. The results indicated that xxx is a strong indicator of the price fluctuation of potential future prices of the rookie card."
 format: pdf
 number-sections: true
 bibliography: references.bib
 ---
+
+
+# Introduction
+
+Collectible cards such as Pokemon, Yu-Gi-Oh! cards, and Sports cards still exist and are relevant in our world. In the digitized world we live in today, these physical cards are often forgotten. We have also heard wild stories about specific Pokemon cards selling for millions of dollars, the same applies to other collectible cards. NBA basketball cards have gained significant popularity in recent years. Apart from being collector's items, they have also become a form of investment for some individuals. 
+
+Many factors go into the valuation of a basketball card. Some example factors include the rarity of the card, the performance and popularity of the player, which series it comes from, and the condition of the card. Each year, the cards are updated and RC labeled cards are labeled on the players that are rookies for that year. These RC-labeled cards are only printed in that specific year and are usually the most sought-after cards among collectors. The specific stats of each player such as points per game, rebounds, and turnover also dictate the valuation of their rookie cards. The complexity of these elements often makes it difficult to predict the future value of the card.
+
+This analysis finds that….
+
+
+
+	In Section 2 of the paper, the source and datasets are discussed. Strengths and weaknesses, methods of collection, and terminologies will be explored. Section 3 of the paper will incorporate a model aiming to use player statistics to predict the price trend of the card. Section 4 will then look at the results from the model. Lastly, section 5 will be a reflection about possible steps and the discussion of the strengths and weaknesses of this analysis. 
+
+
+
 
 ```{r}
 #| include: false
@@ -22,17 +38,9 @@ library(palmerpenguins)
 ```
 
 
-# Introduction
 
-You can and should cross-reference sections and sub-sections. We use @citeR and @rohan.
+# Data
 
-The remainder of this paper is structured as follows. @sec-data....
-
-
-
-# Data {#sec-data}
-
-Some of our data is of penguins (@fig-bills), from @palmerpenguins.
 
 ```{r}
 #| label: fig-bills
@@ -77,7 +85,7 @@ Talk way more about it.
 
 The goal of our modelling strategy is twofold. Firstly,...
 
-Here we briefly describe the Bayesian analysis model used to investigate... Background details and diagnostics are included in [Appendix -@sec-model-details].
+
 
 ## Model set-up
 
@@ -151,64 +159,14 @@ If my paper were 10 pages, then should be be at least 2.5 pages. The discussion 
 
 Weaknesses and next steps should also be included.
 
+
+
 \newpage
 
 \appendix
 
-# Appendix {-}
+# Appendix
 
-
-# Additional data details
-
-# Model details {#sec-model-details}
-
-## Posterior predictive check
-
-In @fig-ppcheckandposteriorvsprior-1 we implement a posterior predictive check. This shows...
-
-In @fig-ppcheckandposteriorvsprior-2 we compare the posterior with the prior. This shows... 
-
-```{r}
-#| eval: true
-#| echo: false
-#| message: false
-#| warning: false
-#| label: fig-ppcheckandposteriorvsprior
-#| layout-ncol: 2
-#| fig-cap: "Examining how the model fits, and is affected by, the data"
-#| fig-subcap: ["Posterior prediction check", "Comparing the posterior with the prior"]
-
-pp_check(first_model) +
-  theme_classic() +
-  theme(legend.position = "bottom")
-
-posterior_vs_prior(first_model) +
-  theme_minimal() +
-  scale_color_brewer(palette = "Set1") +
-  theme(legend.position = "bottom") +
-  coord_flip()
-```
-
-## Diagnostics
-
-@fig-stanareyouokay-1 is a trace plot. It shows... This suggests...
-
-@fig-stanareyouokay-2 is a Rhat plot. It shows... This suggests...
-
-```{r}
-#| echo: false
-#| eval: true
-#| message: false
-#| warning: false
-#| label: fig-stanareyouokay
-#| fig-cap: "Checking the convergence of the MCMC algorithm"
-#| fig-subcap: ["Trace plot", "Rhat plot"]
-#| layout-ncol: 2
-
-plot(first_model, "trace")
-
-plot(first_model, "rhat")
-```
 
 
 
