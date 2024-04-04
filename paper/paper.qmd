@@ -1,5 +1,5 @@
 ---
-title: "My title"
+title: "Performance of Rookie Can Predict Price of Their RC based Prizm Cards"
 subtitle: "My subtitle if needed"
 author: 
   - Harrison Huang
