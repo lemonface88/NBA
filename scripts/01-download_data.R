@@ -9,50 +9,37 @@
 
 
 #### Workspace setup ####
-library(opendatatoronto)
 library(tidyverse)
-library(arrow)
+library(rvest)
+library(stringr)
+library(dplyr)
 
 #### Download data ####
 
+# Data for maxey during 2024-2024 split
+maxey_url_2023 <- read_html("https://www.espn.com/nba/player/splits/_/id/4431678/tyrese-maxey")
 
-# All players data
-all_player_datasets <-
-  fromJSON("https://api.sportsdata.io/v3/nba/scores/json/Players?key=92a4662dc81b4f56bd99cc606f483004")
+maxey_tables <- 
+  maxey_url_2023 |>
+  html_nodes("table")|>
+  html_table(fill = TRUE)
 
+# the big table on the ESPN website is actually split in half, therefore we need to merge it back after scraping it
+maxey_left <- maxey_tables[[1]]
+maxey_right <- maxey_tables[[2]]
 
-#Zion Williamson's data set
-Zion_datasets <-
-  fromJSON("https://api.sportsdata.io/v3/nba/stats/json/PlayerGameStatsBySeason/2023/20002271/all?key=92a4662dc81b4f56bd99cc606f483004")
-
-#Anthony Edwards's data set
-Anthony_datasets <-
-  fromJSON("https://api.sportsdata.io/v3/nba/stats/json/PlayerGameStatsBySeason/2023/20002523/all?key=92a4662dc81b4f56bd99cc606f483004")
-
-#Lamelo Ball data set
-LaMelo_datasets <-
-  fromJSON("https://api.sportsdata.io/v3/nba/stats/json/PlayerGameStatsBySeason/2023/20002528/all?key=92a4662dc81b4f56bd99cc606f483004")
-
-#Tyrese Haliburton
-Haliburton_datasets <-
-  fromJSON("https://api.sportsdata.io/v3/nba/stats/json/PlayerGameStatsBySeason/2023/20002537/all?key=92a4662dc81b4f56bd99cc606f483004")
-
-#Tyrese Maxey
-maxey_datasets <-
-  fromJSON("https://api.sportsdata.io/v3/nba/stats/json/PlayerGameStatsBySeason/2023/20002546/all?key=92a4662dc81b4f56bd99cc606f483004")
+maxey_data_c <-
+cbind(maxey_left, maxey_right)
 
 
+view(maxey_data_c)
+
+# Data for maxey during 2024-2024 split
 
 #### Save data ####
 
 
-write_csv(all_player_datasets, "data/raw_data/raw_all_player_datasets.csv")
+write_csv(maxey_data_c, "data/raw_data/raw_maxey_data.csv")
 
-write_csv(Zion_datasets, "data/raw_data/raw_zion_datasets.csv")
 
-write_csv(LaMelo_datasets, "data/raw_data/raw_lamelo_datasets.csv")
-
-write_csv(Haliburton_datasets, "data/raw_data/raw_haliburton_datasets.csv")
-
-write_csv(maxey_datasets, "data/raw_data/raw_maxey_datasets.csv")
          
