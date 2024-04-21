@@ -53,7 +53,6 @@ clean_maxey_data <-
 
 
 #### Save data ####
-write_parquet(clean_zion_data, "data/analysis_data/clean_zion_data.parquet")
 
 
 
