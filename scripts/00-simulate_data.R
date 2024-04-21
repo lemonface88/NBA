@@ -13,6 +13,6 @@ library(tidyverse)
 
 #### Simulate data ####
 
-
+set.seed(888)
 
 

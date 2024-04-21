@@ -55,4 +55,13 @@ clean_maxey_data <-
 #### Save data ####
 
 
+# becase of errors that occur throughout the attemts to save files as  parquet, the files will not be saved as parquet format. 
+#Error in parquet___WriterProperties___Builder__create() : 
+#Cannot call parquet___WriterProperties___Builder__create(). See https://arrow.apache.org/docs/r/articles/install.html for help installing Arrow C++ libraries. 
+
+
+write_csv(clean_zion_data, "data/analysis_data/cleaned_zion_data.csv")
+write_csv(clean_lamelo_data, "data/analysis_data/cleaned_lamelo_data.csv")
+write_csv(clean_maxey_data, "data/analysis_data/cleaned_maxey_data.csv")
+write_csv(clean_haliburton_data, "data/analysis_data/cleaned_haliburton_data.csv")
 
