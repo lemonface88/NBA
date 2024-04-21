@@ -32,9 +32,37 @@ simulated_player_data <-
       replace = TRUE),
     
     # statistics of points per game
-    pps = sample(
-      x = c(0:60),
+    ppg = sample(
+      x = c(round(0:500/10, digits = 1)),
+      size = 1000,
+      replace = TRUE),
+    
+    # statistics of assist per game 
+    ast = sample(
+      x = c(round(0:70/10, digits = 1)),
+      size = 1000,
+      replace = TRUE),
+    
+    # statistics of blocks per game
+    blk = sample(
+      x = c(round(0:10/10, digits = 1)),
+      size = 1000,
+      replace = TRUE),
+    
+    
+    # statistics of rebound per game
+    reb = sample(
+      x = c(round(0:70/10, digits = 1)),
+      size = 1000,
+      replace = TRUE),
+    
+    
+    # statistics of steals per game
+    stl = sample(
+      x = c(round(0:20/10, digits = 1)),
       size = 1000,
       replace = TRUE)
+    
   )
 
+view(simulated_player_data)
