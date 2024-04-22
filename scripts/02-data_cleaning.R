@@ -17,43 +17,36 @@ library(arrow)
 #  janitor::clean_names()|>
 #  tidyr::drop_na()|>
 
-# clean zion data
-raw_data_zion <- read_csv("data/raw_data/raw_zion_datasets.csv")
-
-clean_zion_data <-
-  raw_data_zion |>
-  select(Day, FieldGoalsMade, FieldGoalsAttempted,FieldGoalsPercentage, TwoPointersPercentage, ThreePointersPercentage, FreeThrowsPercentage, Minutes)|>
-  filter(Minutes > 0)
-  
-
-# clean haliburton data
-raw_data_haliburton <- read_csv("data/raw_data/raw_haliburton_datasets.csv")
-
-clean_haliburton_data <-
-  raw_data_haliburton |>
-  select(Day, FieldGoalsMade, FieldGoalsAttempted,FieldGoalsPercentage, TwoPointersPercentage, ThreePointersPercentage, FreeThrowsPercentage, Minutes)|>
-  filter(Minutes > 0)
-
-# clean lamelo data
-raw_data_lamelo <- read_csv("data/raw_data/raw_lamelo_datasets.csv")
-
-clean_lamelo_data <-
-  raw_data_lamelo |>
-  select(Day, FieldGoalsMade, FieldGoalsAttempted,FieldGoalsPercentage, TwoPointersPercentage, ThreePointersPercentage, FreeThrowsPercentage, Minutes)|>
-  filter(Minutes > 0)
+# clean zion data and combine it #
+zion_2022 <- read_csv("data/raw_data/zion_data_2022.csv")
+zion_2023 <- read_csv("data/raw_data/zion_data_2023.csv")
 
 
-# clean maxey data
-raw_data_maxey <- read_csv("data/raw_data/raw_maxey_datasets.csv")
+# take out the month and wanted data, stack it together
+# merge two graphs by 2022 ontop of 2023, and then merge a table of the time to the left
 
-clean_maxey_data <-
-  raw_data_maxey |>
-  select(Day, FieldGoalsMade, FieldGoalsAttempted,FieldGoalsPercentage, TwoPointersPercentage, ThreePointersPercentage, FreeThrowsPercentage, Minutes)|>
-  filter(Minutes > 0)
+
+# clean maxey data and combine it #
+maxey_2022 <- read_csv("data/raw_data/maxey_data_2022.csv")
+maxey_2023 <- read_csv("data/raw_data/maxey_data_2023.csv")
+
+
+# clean lamelo data and combine it #
+lamelo_2022 <- read_csv("data/raw_data/lamelo_data_2022.csv")
+lamelo_2023 <- read_csv("data/raw_data/lamelo_data_2023.csv")
+
+
+# clean haliburton data and combine it #
+haliburton_2022 <- read_csv("data/raw_data/haliburton_data_2022.csv")
+haliburton_2023 <- read_csv("data/raw_data/haliburton_data_2023.csv")
+
+
+# clean anthony_edwards data and combine it #
+anthony_edwards_2022 <- read_csv("data/raw_data/anthony_edward_data_2022.csv")
+anthony_edwards_2023 <- read_csv("data/raw_data/anthony_edward_data_2022.csv")
 
 
 #### Save data ####
-
 
 # becase of errors that occur throughout the attemts to save files as  parquet, the files will not be saved as parquet format. 
 #Error in parquet___WriterProperties___Builder__create() : 
@@ -64,4 +57,5 @@ write_csv(clean_zion_data, "data/analysis_data/cleaned_zion_data.csv")
 write_csv(clean_lamelo_data, "data/analysis_data/cleaned_lamelo_data.csv")
 write_csv(clean_maxey_data, "data/analysis_data/cleaned_maxey_data.csv")
 write_csv(clean_haliburton_data, "data/analysis_data/cleaned_haliburton_data.csv")
+
 

@@ -26,7 +26,7 @@ simulated_player_data <-
     ), 
     
     # randomly assigning each player to a month
-    age_group =  sample(
+    player_name =  sample(
       x = c("LaMelo Ball", "Tyrese Maxey", "Tyrese Haliburton", "Zion Williamson", "Edward Anthony"),
       size = 1000,
       replace = TRUE),
@@ -65,4 +65,38 @@ simulated_player_data <-
     
   )
 
-view(simulated_player_data)
+
+##Simulate Player Card Price data##
+
+simulated_price_data <-
+  tibble(
+    # randomly select a year to assign to the ticket_count
+    month_of_season = sample(
+      x = c("October", "November", "December", "January", "Feburary", "March", "April"),
+      size = 1000,
+      replace = TRUE
+    ), 
+    
+    # randomly assigning each player to a month
+    player_name =  sample(
+      x = c("LaMelo Ball", "Tyrese Maxey", "Tyrese Haliburton", "Zion Williamson", "Edward Anthony"),
+      size = 1000,
+      replace = TRUE),
+    
+    # assign random price to month and person
+    
+    price =  sample(
+      x = c(round(500:1000/3, digits = 2)),
+      size = 1000,
+      replace = TRUE),
+
+  )
+
+# Example of simulated player#
+simulated_lamelo_price <-
+  simulated_price_data|>
+  filter(player_name =="LaMelo Ball")|>
+  summarise(average_price = mean(price),
+            .by = month_of_season) 
+
+

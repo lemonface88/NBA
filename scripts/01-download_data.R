@@ -13,7 +13,7 @@ library(tidyverse)
 library(rvest)
 library(stringr)
 library(dplyr)
-
+library(readxl)
 #### Download data ####
 
 # Data for maxey during 2022-2023 split
@@ -178,7 +178,10 @@ lamelo_data_2023 <-
   cbind(lamelo_left, lamelo_right)
 
 
+##Importing the Price data##
 
+card_price <- read_excel("~/Downloads/Card Price.xlsx")
+View(Card_Price) 
 
 #### Save data ####
 
@@ -196,3 +199,5 @@ write_csv(anthony_edward_data_2023, "data/raw_data/anthony_edward_data_2023.csv"
 
 write_csv(lamelo_data_2022, "data/raw_data/lamelo_data_2022.csv")
 write_csv(lamelo_data_2023, "data/raw_data/lamelo_data_2023.csv")
+
+write_csv(card_price, "data/raw_data/card_price.csv")
