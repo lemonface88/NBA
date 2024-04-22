@@ -72,7 +72,7 @@ simulated_price_data <-
   tibble(
     # randomly select a year to assign to the ticket_count
     month_of_season = sample(
-      x = c("October", "November", "December", "January", "Feburary", "March", "April"),
+      x = c("October", "November", "December", "January", "February", "March", "April"),
       size = 1000,
       replace = TRUE
     ), 

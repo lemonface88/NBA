@@ -17,6 +17,13 @@ library(arrow)
 #  janitor::clean_names()|>
 #  tidyr::drop_na()|>
 
+x <- c("2022-10-01", "2022-11-01", "2022-12-01", "2023-01-01", "2023-02-01", "2023-03-01", 
+       "2023-04-01", "2023-10-01", "2023-11-01", "2023-12-01", "2024-01-01", "2024-02-01", "2024-03-01", "2024-04-01")
+
+as.Date(x)
+
+# create the colum of dates that will get added to the left later.
+
 # clean zion data and combine it #
 zion_2022 <- read_csv("data/raw_data/zion_data_2022.csv")
 zion_2023 <- read_csv("data/raw_data/zion_data_2023.csv")
