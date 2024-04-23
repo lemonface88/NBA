@@ -20,12 +20,24 @@ library(tibble)
 Months <- c("2022-10-01", "2022-11-01", "2022-12-01", "2023-01-01", "2023-02-01", "2023-03-01", 
        "2023-04-01", "2023-10-01", "2023-11-01", "2023-12-01", "2024-01-01", "2024-02-01", "2024-03-01", "2024-04-01")
 
-format(as.Date(x), "%Y-%m")
+Months <- format(as.Date(Months), "%Y-%m")
+
 
 # create the colum of dates that will get added to the left later.
 
-# clean zion data and combine it #
+
 clean_price_data <- read_csv("data/raw_data/card_price.csv")
+
+view(clean_price_data)
+
+clean_price_data <- clean_price_data[-c(8), ]
+clean_price_data$`2022-23` <- NULL
+
+clean_price_data <-
+  clean_price_data|>
+  add_column(Date = Months, .before = "LaMelo")
+
+view(clean_price_data)
 
 
 # clean maxey data and combine it #
@@ -66,9 +78,9 @@ clean_maxey <- rbind(temp_maxey_2022, temp_maxey_2023)|>
     PTS = X17
   )
 
-add_column(clean_maxey, Months, .before = "REB")
+clean_maxey <- add_column(clean_maxey, Months, .before = "REB")
   
-
+view(clean_maxey)
 
 # clean lamelo data and combine it #
 lamelo_2022 <- read_csv("data/raw_data/lamelo_data_2022.csv")
@@ -111,7 +123,7 @@ clean_lamelo <- rbind(temp_lamelo_2022, temp_lamelo_2023)|>
   )
 
 view(clean_lamelo)
-add_column(clean_lamelo, Months, .before = "REB")
+clean_lamelo <- add_column(clean_lamelo, Months, .before = "REB")
 
 
 # clean haliburton data and combine it #
@@ -153,7 +165,8 @@ clean_haliburton <- rbind(temp_haliburton_2022, temp_haliburton_2023)|>
   )
 
 
-add_column(clean_haliburton, Months, .before = "REB")
+clean_haliburton <- add_column(clean_haliburton, Months, .before = "REB")
+
 
 # clean anthony_edward data and combine it #
 anthony_edward_2022 <- read_csv("data/raw_data/anthony_edward_data_2022.csv")
@@ -193,15 +206,16 @@ clean_anthony_edward <- rbind(temp_anthony_edward_2022, temp_anthony_edward_2023
     PTS = X17
   )
 
-add_column(clean_anthony_edward, Months, .before = "REB")
+clean_anthony_edward <- add_column(clean_anthony_edward, Months, .before = "REB")
 
+view(clean_anthony_edward)
 #### Save data ####
 
 # becase of errors that occur throughout the attemts to save files as  parquet, the files will not be saved as parquet format. 
 #Error in parquet___WriterProperties___Builder__create() : 
 #Cannot call parquet___WriterProperties___Builder__create(). See https://arrow.apache.org/docs/r/articles/install.html for help installing Arrow C++ libraries. 
 
-
+view(clean_maxey)
 write_csv(clean_maxey, "data/analysis_data/clean_maxey.csv")
 write_csv(clean_haliburton, "data/analysis_data/clean_haliburton.csv")
 write_csv(clean_anthony_edward, "data/analysis_data/clean_anthony_edward.csv")

@@ -12,6 +12,42 @@ number-sections: true
 bibliography: references.bib
 ---
 
+```{r}
+#| include: false
+#| warning: false
+#| message: false
+
+library(tidyverse)
+library(arrow)
+library(here)
+library(palmerpenguins)
+library(knitr)
+library(rstanarm)
+
+
+# load data
+anthony_edward = read_csv(
+  file = "/Users/harrison/NBA/data/analysis_data/clean_anthony_edward.csv",
+  show_col_types = FALSE
+)
+
+haliburton = read_csv(
+  file = "/Users/harrison/NBA/data/analysis_data/clean_haliburton.csv",
+  show_col_types = FALSE
+)
+
+maxey = read_csv(
+  file = "/Users/harrison/NBA/data/analysis_data/clean_maxey.csv",
+  show_col_types = FALSE
+)
+
+price_data = read_csv(
+  file = "/Users/harrison/NBA/data/analysis_data/clean_price_data.csv",
+  show_col_types = FALSE
+)
+```
+
+
 
 # Introduction
 
@@ -26,35 +62,58 @@ This analysis finds that….
 	In Section 2 of the paper, the source and datasets are discussed. Strengths and weaknesses, methods of collection, and terminologies will be explored. Section 3 of the paper will incorporate a model aiming to use player statistics to predict the price trend of the card. Section 4 will then look at the results from the model. Lastly, section 5 will be a reflection about possible steps and the discussion of the strengths and weaknesses of this analysis. 
 
 
-
-
-```{r}
-#| include: false
-#| warning: false
-#| message: false
-
-library(tidyverse)
-library(palmerpenguins)
-```
-
-
 # Data
 
-Talk more about it. Data used here are unmanipulated data, simply created by graph functions with the data sets.
+Data used here are unmanipulated data, simply created by graph functions with the data sets.
+
+The first place the data was collected from is ESPN API, player statistics were obtained from scrapping the website and picking out the right tables. Please be respectful if you decide to use it for any other purpose. Each player had multiple tables and I downloaded the tables and merged players’ 202202-2023 and 2023-2024 data. This allows all statistics to be viewed in one table. In addition, when considering which of the statistics to focus on, I asked an NBA reporter Lisa Kao for suggestions. She mentioned that average points, blocks, steals, and assists are the top 5 statistics focused on in the industry.
+
+The second source of the data came from Sportscardpro website. They collect data from eBay's successful transactions of the card and gather them onto their website. Since there was no table to download the data, I had to manually create an Excel file with the data presented on the website and then import it into rStudio. The price focuses on the PSA 10 and Prizm Silver series of that specific player's rookie card. 
 
 The analysis of these three datasets will be carried out using the statistical programming language `R` [@citeR], using the `tidyverse`[@citetidy], `here`[@citehere], and `readxl`[@citexl] packages. The figures and tables in the paper are generated using the, respectively, `ggplot2`[@citegg] and `knitr`[@citeknitr] packages.
+
+
+## Player Statistics
+
+Below is a brief explination of the tables including player statistics:
+
+1. The `REB` column refers to the number of rebounds the player average per game in that month.
+2. The `AST` column refers to the number of assists the player average per game in that month.
+3. The `BLK` column refers to the number of blocks the player average per game in that month.
+4. The `STL` column refers to the number of steals the player average per game in that month.
+5. The `PTS` column refers to the number of points the player average per game in that month.
+
+
 ```{r}
-#| include: false
+#| label: tbl-1
+#| tbl-cap: The data set containing player statistics of Anthon Edward from 2022 to 2024
+#| echo: false
 #| warning: false
-#| message: false
 
-library(tidyverse)
-library(palmerpenguins)
-
-
-
-
+head(anthony_edward, padding = 5)
 ```
+
+```{r}
+#| label: tbl-2
+#| tbl-cap: The data set containing player statistics of Tyrese Maxey from 2022 to 2024
+#| echo: false
+#| warning: false
+
+head(anthony_edward, padding = 5)
+```
+
+```{r}
+#| label: tbl-3
+#| tbl-cap: The data set containing player statistics of Tyrese Haliburton from 2022 to 2024
+#| echo: false
+#| warning: false
+
+head(anthony_edward, padding = 5)
+```
+
+ @tbl-1, @tbl-2, and  @tbl-3 are the three player statistics data that will be used in the model. 
+
+## Card Price statistics
 
 
 # Model
