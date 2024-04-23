@@ -11,47 +11,189 @@ library(tidyverse)
 library(janitor)
 library(tidyr)
 library(arrow)
-
+library(tibble)
 #### Clean data ####
 
 #  janitor::clean_names()|>
 #  tidyr::drop_na()|>
 
-x <- c("2022-10-01", "2022-11-01", "2022-12-01", "2023-01-01", "2023-02-01", "2023-03-01", 
+Months <- c("2022-10-01", "2022-11-01", "2022-12-01", "2023-01-01", "2023-02-01", "2023-03-01", 
        "2023-04-01", "2023-10-01", "2023-11-01", "2023-12-01", "2024-01-01", "2024-02-01", "2024-03-01", "2024-04-01")
 
-as.Date(x)
+format(as.Date(x), "%Y-%m")
 
 # create the colum of dates that will get added to the left later.
 
 # clean zion data and combine it #
-zion_2022 <- read_csv("data/raw_data/zion_data_2022.csv")
-zion_2023 <- read_csv("data/raw_data/zion_data_2023.csv")
-
-
-# take out the month and wanted data, stack it together
-# merge two graphs by 2022 ontop of 2023, and then merge a table of the time to the left
+clean_price_data <- read_csv("data/raw_data/card_price.csv")
 
 
 # clean maxey data and combine it #
 maxey_2022 <- read_csv("data/raw_data/maxey_data_2022.csv")
 maxey_2023 <- read_csv("data/raw_data/maxey_data_2023.csv")
 
+temp_maxey_2022 <-
+maxey_2022 |>
+  filter(
+           X1...1 == "October"| 
+           X1...1 == "November"| 
+           X1...1 == "December"| 
+           X1...1 == "January"|
+           X1...1 == "February"|
+           X1...1 == "March"|
+           X1...1 == "April") |>
+  select(X11, X12, X13, X14, X17)
+
+
+temp_maxey_2023 <-
+maxey_2023 |>
+  filter(X1...1 == "October"| 
+           X1...1 == "November"| 
+           X1...1 == "December"| 
+           X1...1 == "January"|
+           X1...1 == "February"|
+           X1...1 == "March"|
+           X1...1 == "April") |>
+  select(X11, X12, X13, X14, X17)
+  
+
+clean_maxey <- rbind(temp_maxey_2022, temp_maxey_2023)|>
+  rename(
+    REB = X11,
+    AST = X12,
+    BLK = X13,
+    STL = X14,
+    PTS = X17
+  )
+
+add_column(clean_maxey, Months, .before = "REB")
+  
+
 
 # clean lamelo data and combine it #
 lamelo_2022 <- read_csv("data/raw_data/lamelo_data_2022.csv")
 lamelo_2023 <- read_csv("data/raw_data/lamelo_data_2023.csv")
+
+view(lamelo_2022)
+temp_lamelo_2022 <-
+  lamelo_2022 |>
+  filter(
+    X1...1 == "October"| 
+      X1...1 == "November"| 
+      X1...1 == "December"| 
+      X1...1 == "January"|
+      X1...1 == "February"|
+      X1...1 == "March"|
+      X1...1 == "April") |>
+  select(X11, X12, X13, X14, X17)
+
+
+temp_lamelo_2023 <-
+  lamelo_2023 |>
+  filter(
+    X1...1 == "October"| 
+      X1...1 == "November"| 
+      X1...1 == "December"| 
+      X1...1 == "January"|
+      X1...1 == "February"|
+      X1...1 == "March"|
+      X1...1 == "April") |>
+  select(X11, X12, X13, X14, X17)
+
+
+clean_lamelo <- rbind(temp_lamelo_2022, temp_lamelo_2023)|>
+  rename(
+    REB = X11,
+    AST = X12,
+    BLK = X13,
+    STL = X14,
+    PTS = X17
+  )
+
+view(clean_lamelo)
+add_column(clean_lamelo, Months, .before = "REB")
 
 
 # clean haliburton data and combine it #
 haliburton_2022 <- read_csv("data/raw_data/haliburton_data_2022.csv")
 haliburton_2023 <- read_csv("data/raw_data/haliburton_data_2023.csv")
 
+temp_haliburton_2022 <-
+  haliburton_2022 |>
+  filter(
+    X1...1 == "October"| 
+      X1...1 == "November"| 
+      X1...1 == "December"| 
+      X1...1 == "January"|
+      X1...1 == "February"|
+      X1...1 == "March"|
+      X1...1 == "April") |>
+  select(X11, X12, X13, X14, X17)
 
-# clean anthony_edwards data and combine it #
-anthony_edwards_2022 <- read_csv("data/raw_data/anthony_edward_data_2022.csv")
-anthony_edwards_2023 <- read_csv("data/raw_data/anthony_edward_data_2022.csv")
 
+temp_haliburton_2023 <-
+  haliburton_2023 |>
+  filter(
+    X1...1 == "October"| 
+      X1...1 == "November"| 
+      X1...1 == "December"| 
+      X1...1 == "January"|
+      X1...1 == "February"|
+      X1...1 == "March"|
+      X1...1 == "April") |>
+  select(X11, X12, X13, X14, X17)
+
+clean_haliburton <- rbind(temp_haliburton_2022, temp_haliburton_2023)|>
+  rename(
+    REB = X11,
+    AST = X12,
+    BLK = X13,
+    STL = X14,
+    PTS = X17
+  )
+
+
+add_column(clean_haliburton, Months, .before = "REB")
+
+# clean anthony_edward data and combine it #
+anthony_edward_2022 <- read_csv("data/raw_data/anthony_edward_data_2022.csv")
+anthony_edward_2023 <- read_csv("data/raw_data/anthony_edward_data_2022.csv")
+
+temp_anthony_edward_2022 <-
+  anthony_edward_2022 |>
+  filter(
+    X1...1 == "October"| 
+      X1...1 == "November"| 
+      X1...1 == "December"| 
+      X1...1 == "January"|
+      X1...1 == "February"|
+      X1...1 == "March"|
+      X1...1 == "April") |>
+  select(X11, X12, X13, X14, X17)
+
+
+temp_anthony_edward_2023 <-
+  anthony_edwards_2023 |>
+  filter(
+    X1...1 == "October"| 
+      X1...1 == "November"| 
+      X1...1 == "December"| 
+      X1...1 == "January"|
+      X1...1 == "February"|
+      X1...1 == "March"|
+      X1...1 == "April") |>
+  select(X11, X12, X13, X14, X17)
+
+clean_anthony_edward <- rbind(temp_anthony_edward_2022, temp_anthony_edward_2023)|>
+  rename(
+    REB = X11,
+    AST = X12,
+    BLK = X13,
+    STL = X14,
+    PTS = X17
+  )
+
+add_column(clean_anthony_edward, Months, .before = "REB")
 
 #### Save data ####
 
@@ -60,9 +202,9 @@ anthony_edwards_2023 <- read_csv("data/raw_data/anthony_edward_data_2022.csv")
 #Cannot call parquet___WriterProperties___Builder__create(). See https://arrow.apache.org/docs/r/articles/install.html for help installing Arrow C++ libraries. 
 
 
-write_csv(clean_zion_data, "data/analysis_data/cleaned_zion_data.csv")
-write_csv(clean_lamelo_data, "data/analysis_data/cleaned_lamelo_data.csv")
-write_csv(clean_maxey_data, "data/analysis_data/cleaned_maxey_data.csv")
-write_csv(clean_haliburton_data, "data/analysis_data/cleaned_haliburton_data.csv")
+write_csv(clean_maxey, "data/analysis_data/clean_maxey.csv")
+write_csv(clean_haliburton, "data/analysis_data/clean_haliburton.csv")
+write_csv(clean_anthony_edward, "data/analysis_data/clean_anthony_edward.csv")
+write_csv(clean_price_data, "data/analysis_data/clean_price_data.csv")
 
 

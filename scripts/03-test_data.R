@@ -18,51 +18,202 @@ library(janitor)
 
 # read cleaned player data
 
-test_zion_data = read_csv(
-  file = "data/analysis_data/cleaned_zion_data.csv",
-  show_col_types = FALSE
-)
 
-test_lamelo_data = read_csv(
-  file = "data/analysis_data/cleaned_maxey_data.csv",
+test_anthony_edward = read_csv(
+  file = "data/analysis_data/clean_anthony_edward.csv",
   show_col_types = FALSE
 )
 
 test_haliburton_data = read_csv(
-  file = "data/analysis_data/cleaned_lamelo_data.csv",
+  file = "data/analysis_data/clean_haliburton.csv",
   show_col_types = FALSE
 )
 
 test_maxey_data = read_csv(
-  file = "data/analysis_data/cleaned_haliburton_data.csv",
+  file = "data/analysis_data/clean_maxey.csv",
   show_col_types = FALSE
 )
 
+test_price = read_csv(
+  file = "data/analysis_data/clean_price_data.csv",
+  show_col_types = FALSE
+)
 
+### Test anthony_edward data above ###
 
-### Test the data above ###
-
-# Test zion data #
-if (min(test_zion_data$Minutes) < 1) {
-  print("Game when player did not play detected")
+# Test for negativescore 
+if (min(test_anthony_edward$PTS) < 0) {
+  print("Month with negative score detected")
 }
 
-if (max(test_zion_data$Minutes) > 48) {
+# testing for realistic point average for the month
+if (max(test_anthony_edward$PTS) > 50) {
   print("Player played more than max possible time")
 }
 
-if (min(test_youth_data$ticket_count) < 0) {
-  print("Negative number in ticket count")
+# testing if blocks average was below 0
+if (min(test_anthony_edward$BLK) < 0) {
+  print("Month with negative score detected")
 }
 
-if (min(test_youth_data$ticket_count) < 0) {
-  print("Negative number in ticket count")
+# testing for realistic blocks average for the month
+if (max(test_anthony_edward$BLK) > 20) {
+  print("Player blocks average may be unrealistic")
 }
 
-if (min(test_youth_data$ticket_count) < 0) {
-  print("Negative number in ticket count")
+# testing if steal average was below 0
+if (min(test_anthony_edward$STL) < 0) {
+  print("Month with negative score detected")
 }
 
-# Test lamelo data #
+# testing for realistic steal average for the month
+if (max(test_anthony_edward$STL) > 20) {
+  print("Player steal average may be unrealistic")
+}
 
-# Test lamelo data #
+
+# testing if rebound average was below 0
+if (min(test_anthony_edward$REB) < 0) {
+  print("negative rebound detected")
+}
+
+# testing for realistic steal average for the month
+if (max(test_anthony_edward$REB) > 20) {
+  print("Player rebound average may be unrealistic")
+}
+
+# testing if assist average was below 0
+if (min(test_anthony_edward$AST) < 0) {
+  print("negative assist detected")
+}
+
+# testing for realistic assist average for the month
+if (max(test_anthony_edward$AST) > 20) {
+  print("Player assist average may be unrealistic")
+}
+
+### Test haliburton data ###
+
+# Test for negativescore 
+if (min(test_haliburton_data$PTS) < 0) {
+  print("Month with negative score detected")
+}
+
+# testing for realistic point average for the month
+if (max(test_haliburton_data$PTS) > 50) {
+  print("Player played more than max possible time")
+}
+
+# testing if blocks average was below 0
+if (min(test_haliburton_data$BLK) < 0) {
+  print("Month with negative score detected")
+}
+
+# testing for realistic blocks average for the month
+if (max(test_haliburton_data$BLK) > 20) {
+  print("Player blocks average may be unrealistic")
+}
+
+# testing if steal average was below 0
+if (min(test_haliburton_data$STL) < 0) {
+  print("Month with negative score detected")
+}
+
+# testing for realistic steal average for the month
+if (max(test_haliburton_data$STL) > 20) {
+  print("Player steal average may be unrealistic")
+}
+
+
+# testing if rebound average was below 0
+if (min(test_haliburton_data$REB) < 0) {
+  print("negative rebound detected")
+}
+
+# testing for realistic steal average for the month
+if (max(test_haliburton_data$REB) > 20) {
+  print("Player rebound average may be unrealistic")
+}
+
+# testing if assist average was below 0
+if (min(test_haliburton_data$AST) < 0) {
+  print("negative assist detected")
+}
+
+# testing for realistic assist average for the month
+if (max(test_haliburton_data$AST) > 20) {
+  print("Player assist average may be unrealistic")
+}
+
+### Test maxey data ###
+
+
+# Test for negativescore 
+if (min(test_maxey_data$PTS) < 0) {
+  print("Month with negative score detected")
+}
+
+# testing for realistic point average for the month
+if (max(test_maxey_data$PTS) > 50) {
+  print("Player played more than max possible time")
+}
+
+# testing if blocks average was below 0
+if (min(test_maxey_data$BLK) < 0) {
+  print("Month with negative score detected")
+}
+
+# testing for realistic blocks average for the month
+if (max(test_maxey_data$BLK) > 20) {
+  print("Player blocks average may be unrealistic")
+}
+
+# testing if steal average was below 0
+if (min(test_maxey_data$STL) < 0) {
+  print("Month with negative score detected")
+}
+
+# testing for realistic steal average for the month
+if (max(test_maxey_data$STL) > 20) {
+  print("Player steal average may be unrealistic")
+}
+
+
+# testing if rebound average was below 0
+if (min(test_maxey_data$REB) < 0) {
+  print("negative rebound detected")
+}
+
+# testing for realistic steal average for the month
+if (max(test_maxey_data$REB) > 20) {
+  print("Player rebound average may be unrealistic")
+}
+
+# testing if assist average was below 0
+if (min(test_maxey_data$AST) < 0) {
+  print("negative assist detected")
+}
+
+# testing for realistic assist average for the month
+if (max(test_maxey_data$AST) > 20) {
+  print("Player assist average may be unrealistic")
+}
+
+
+## Test Price Data ##
+
+# testing for realistic assist average for the month
+if (min(test_price$`Tyrese Haliburton`) < 0) {
+  print("card price negative")
+}
+
+if (min(test_price$`Anthony Edward`) < 0) {
+  print("card price negative")
+}
+
+if (min(test_price$`Tyrese Maxey`) < 0) {
+  print("card price negative")
+}
+
+
+

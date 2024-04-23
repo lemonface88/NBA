@@ -38,11 +38,23 @@ library(palmerpenguins)
 ```
 
 
-
 # Data
 
 Talk more about it. Data used here are unmanipulated data, simply created by graph functions with the data sets.
 
+The analysis of these three datasets will be carried out using the statistical programming language `R` [@citeR], using the `tidyverse`[@citetidy], `here`[@citehere], and `readxl`[@citexl] packages. The figures and tables in the paper are generated using the, respectively, `ggplot2`[@citegg] and `knitr`[@citeknitr] packages.
+```{r}
+#| include: false
+#| warning: false
+#| message: false
+
+library(tidyverse)
+library(palmerpenguins)
+
+
+
+
+```
 
 
 # Model
