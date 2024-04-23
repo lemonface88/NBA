@@ -18,7 +18,6 @@ library(janitor)
 
 # read cleaned player data
 
-
 test_anthony_edward = read_csv(
   file = "data/analysis_data/clean_anthony_edward.csv",
   show_col_types = FALSE

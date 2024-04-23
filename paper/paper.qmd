@@ -113,13 +113,25 @@ head(anthony_edward, padding = 5)
 
  @tbl-1, @tbl-2, and  @tbl-3 are the three player statistics data that will be used in the model. 
 
-## Card Price statistics
+## Card Price statistics 
+
+```{r}
+#| label: tbl-4
+#| tbl-cap: This table is the Prizm Silver RC card price monthly from 2022 season to the end of 2023 season. 
+#| echo: false
+#| warning: false
+
+head(price_data, padding = 5)
+```
+
+The table above @tbl-4 includes card price. The player card price is from a website called Sportscardpro, they collect data from eBay's successful transactions of the card and gather them onto their website. Since there was no table to download the data, I had to manually create an Excel file with the data presented on the website and then import it into rStudio. The price focuses on the PSA 10 and Prizm Silver series of that specific player's rookie card.
 
 
 # Model
 
-The goal of our modelling strategy is twofold. Firstly,...
 
+The goal of this paper's modelling strategy is to investigate the effect that average player statistics has on their price of the PSA 10 Prizm Silver rookie card. Since we expect the relationship to be positively related, if a player plays better, the price of their Rookie Card should increase, therefore we will use a linear regression model. 
+I will use the model to make potential prediction of the upcoming price of the player card based on their current statistics and price data. 
 
 
 ## Model set-up
@@ -147,6 +159,10 @@ We can use maths by including latex between dollar signs, for instance $\theta$.
 
 # Results
 
+## Average player statistics 
+
+## Price trend ratio to player average
+
 
 
 # Discussion
@@ -161,7 +177,7 @@ If my paper were 10 pages, then should be be at least 2.5 pages. The discussion 
 
 ## Weaknesses and next steps
 
-Weaknesses and next steps should also be included.
+Weaknesses and next steps should also be included. More player should be added into this analysis and 
 
 
 
@@ -170,7 +186,6 @@ Weaknesses and next steps should also be included.
 \appendix
 
 # Appendix
-
 
 
 
