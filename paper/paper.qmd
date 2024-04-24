@@ -149,6 +149,49 @@ y_i|\mu_i, \sigma &\sim \mbox{Normal}(\mu_i, \sigma) \\
 
 We run the model in R [@citeR] using the `rstanarm` package of @rstanarm. We use the default priors from `rstanarm`.
 
+## Model preduction
+
+```{r}
+#| echo: false
+#| warning: false
+
+test_maxey <- tibble(
+  REB = c(
+    4.5, 4.3, 5.1, 3.1, 4.5, 5.6, 7.8, 4.5, 6.5, 4.1, 4.3, 6.5, 5.8, 5.5
+  ),
+  AST = c(
+    4.5, 4.3, 5.1, 3.1, 4.5, 5.6, 7.8, 4.5, 6.5, 4.1, 4.3, 6.5, 5.8, 5.5
+  ),
+  BLK = c(
+    4.5, 4.3, 5.1, 3.1, 4.5, 5.6, 7.8, 4.5, 6.5, 4.1, 4.3, 6.5, 5.8, 5.5
+  ),
+  STL = c(
+    4.5, 4.3, 5.1, 3.1, 4.5, 5.6, 7.8, 4.5, 6.5, 4.1, 4.3, 6.5, 5.8, 5.5
+  ),
+  PTS = c(
+    20, 25, 40, 30, 45, 20, 30, 35, 20, 15, 35, 30, 35, 20 
+  )
+)
+
+view(test_maxey)
+
+maxey_prediction <- predict(maxey_model, newdata = test_maxey)
+
+```
+
+
+```{r}
+#| label: tbl-5
+#| tbl-cap: This table is the prediction price of Tyrese Maxey RC Prizm Silver card using the model 
+#| echo: false
+#| warning: false
+
+kable(maxey_prediction, padding = 5)
+
+view(maxey_prediction)
+```
+
+
 
 ### Model justification
 
@@ -187,6 +230,21 @@ Weaknesses and next steps should also be included. More player should be added i
 
 # Appendix
 
+## Model Check
+
+```{r}
+library(rstanarm)
+
+pp_check(maxey_model) +
+  theme_classic() +
+  theme(legend.position = "bottom")
+
+posterior_vs_prior(maxey_model) +
+  theme_minimal() +
+  scale_color_brewer(palette = "Set1") +
+  theme(legend.position = "bottom") +
+  coord_flip()
+```
 
 
 \newpage
