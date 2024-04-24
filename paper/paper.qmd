@@ -6,11 +6,16 @@ author:
 thanks: "Code and data are available at: https://github.com/lemonface88/NBA"
 date: today 
 date-format: long
-abstract: "Collecting and investing in cards has been relevant for a while now. There are complex factors that contribute to the price fluxation of these cards. This analysis will use player statistics to create a model to try to grasp possible future price trends of the card. A xxx model was used in this analysis. The results indicated that xxx is a strong indicator of the price fluctuation of potential future prices of the rookie card."
+abstract: "Collecting and investing in cards has been relevant for a while now. There are complex factors that contribute to the price fluxation of these cards. This analysis will use player statistics to create a model to try to grasp possible future price trends of the card. A linear model was used in this analysis. The results indicated that player statistics may still not be sufficient to predict future prices of the rookie card."
 format: pdf
 number-sections: true
 bibliography: references.bib
 ---
+```{r}
+#library(readr)
+#write_bib()
+```
+
 
 ```{r}
 #| include: false
@@ -45,6 +50,11 @@ price_data = read_csv(
   file = "/Users/harrison/NBA/data/analysis_data/clean_price_data.csv",
   show_col_types = FALSE
 )
+
+maxey_model <- read_rds("/Users/harrison/NBA/models/maxey_model.rds")
+haliburton_model <- read_rds("/Users/harrison/NBA/models/haliburton_model.rds")
+anthony_model <- read_rds("/Users/harrison/NBA/models/anthony_model.rds")
+
 ```
 
 
@@ -55,18 +65,14 @@ Collectible cards such as Pokemon, Yu-Gi-Oh! cards, and Sports cards still exist
 
 Many factors go into the valuation of a basketball card. Some example factors include the rarity of the card, the performance and popularity of the player, which series it comes from, and the condition of the card. Each year, the cards are updated and RC labeled cards are labeled on the players that are rookies for that year. These RC-labeled cards are only printed in that specific year and are usually the most sought-after cards among collectors. The specific stats of each player such as points per game, rebounds, and turnover also dictate the valuation of their rookie cards. The complexity of these elements often makes it difficult to predict the future value of the card.
 
-This analysis finds that….
+This analysis finds that there are a lot more than performance linking to the price of the rookie card. The performance statistics is only a some of the reasons fluctuating card prices. There are so much more than just the performance of the rookie when taking in consideration of price analysis. Future steps will needed in order to take a look at more factors that may affect the price of the rookie card of that specific player. 
 
-
-
-	In Section 2 of the paper, the source and datasets are discussed. Strengths and weaknesses, methods of collection, and terminologies will be explored. Section 3 of the paper will incorporate a model aiming to use player statistics to predict the price trend of the card. Section 4 will then look at the results from the model. Lastly, section 5 will be a reflection about possible steps and the discussion of the strengths and weaknesses of this analysis. 
+	In Section 2 of the paper, the source and data sets are discussed. Strengths and weaknesses, methods of collection, and terminologies will be explored. Section 3 of the paper will incorporate a model aiming to use player statistics to predict the price trend of the card. Section 4 will then look at the results from the model. Lastly, section 5 will be a reflection about possible steps and the discussion of the strengths and weaknesses of this analysis. 
 
 
 # Data
 
-Data used here are unmanipulated data, simply created by graph functions with the data sets.
-
-The first place the data was collected from is ESPN API, player statistics were obtained from scrapping the website and picking out the right tables. Please be respectful if you decide to use it for any other purpose. Each player had multiple tables and I downloaded the tables and merged players’ 202202-2023 and 2023-2024 data. This allows all statistics to be viewed in one table. In addition, when considering which of the statistics to focus on, I asked an NBA reporter Lisa Kao for suggestions. She mentioned that average points, blocks, steals, and assists are the top 5 statistics focused on in the industry.
+The first place the data was collected from is ESPN, player statistics were obtained from scrapping the website and picking out the right tables. Please be respectful if you decide to use it for any other purpose. Each player had multiple tables and I downloaded the tables and merged players’ 202202-2023 and 2023-2024 data. This allows all statistics to be viewed in one table. In addition, when considering which of the statistics to focus on, I asked an NBA reporter Lisa Kao for suggestions. She mentioned that average points, blocks, steals, and assists are the top 5 statistics focused on in the industry. Something to keep in mind is that these statistics presented are all positive statistics, which means that the higher the number the better the player has performed. 
 
 The second source of the data came from Sportscardpro website. They collect data from eBay's successful transactions of the card and gather them onto their website. Since there was no table to download the data, I had to manually create an Excel file with the data presented on the website and then import it into rStudio. The price focuses on the PSA 10 and Prizm Silver series of that specific player's rookie card. 
 
@@ -111,7 +117,7 @@ head(anthony_edward, padding = 5)
 head(anthony_edward, padding = 5)
 ```
 
- @tbl-1, @tbl-2, and  @tbl-3 are the three player statistics data that will be used in the model. 
+In @tbl-1, @tbl-2, and  @tbl-3 are the three player statistics data that will be used in the model.
 
 ## Card Price statistics 
 
@@ -124,36 +130,51 @@ head(anthony_edward, padding = 5)
 head(price_data, padding = 5)
 ```
 
-The table above @tbl-4 includes card price. The player card price is from a website called Sportscardpro, they collect data from eBay's successful transactions of the card and gather them onto their website. Since there was no table to download the data, I had to manually create an Excel file with the data presented on the website and then import it into rStudio. The price focuses on the PSA 10 and Prizm Silver series of that specific player's rookie card.
+The table above @tbl-4 includes the card price. The player card price is from a website called Sportscardpro, they collect data from eBay's successful transactions of the card and gather them onto their website. Since there was no table to download the data, I had to manually create an Excel file with the data presented on the website and then import it into rStudio. The price focuses on the PSA 10 and Prizm Silver series of that specific player's rookie card. Initially, I was going to include data for Zion and LaMelo, however, due to injuries that occurred throughout their career, the player statistics were inconsistent and had a lot of missing months. For those reasons, I will only be following forward with Tyrese Maxey, Tyrese Haliburton, and Anthony Edward. 
 
 
 # Model
 
-
-The goal of this paper's modelling strategy is to investigate the effect that average player statistics has on their price of the PSA 10 Prizm Silver rookie card. Since we expect the relationship to be positively related, if a player plays better, the price of their Rookie Card should increase, therefore we will use a linear regression model. 
-I will use the model to make potential prediction of the upcoming price of the player card based on their current statistics and price data. 
+The goal of this paper's modelling strategy is to investigate the effect that average player statistics has on their price of the PSA 10 Prizm Silver rookie card. I will then use the model to make potential prediction of the upcoming price of the player card based on their current statistics and price data. 
 
 
 ## Model set-up
 
-Define $y_i$ as the number of seconds that the plane remained aloft. Then $\beta_i$ is the wing width and $\gamma_i$ is the wing length, both measured in millimeters.  
+Define $y_i$ as the price of the PSA10 Prizm Silver rookie card. Then $\beta_1$ is the average rebounds a player gets per game, $\gamma_1$ is the average assists a player gets per game, $\theta_1$ is the average blocks a player gets per game, $\phi_1$ is the average steals a player gets per game, and lastly, $\kappa_1$ is the average points a player gets per game. This is the same for all the player, since each players' statistics and card price likely independent, I will use the same model on the three players, Tyrese Haliburton, Tyrese Maxey, and Anthony Edward.
+
 
 \begin{align} 
 y_i|\mu_i, \sigma &\sim \mbox{Normal}(\mu_i, \sigma) \\
-\mu_i &= \alpha + \beta_i + \gamma_i\\
+\mu_i &= \alpha + \theta_i + \phi_i + \kappa_i + \beta_i * \gamma_i \\
 \alpha &\sim \mbox{Normal}(0, 2.5) \\
 \beta &\sim \mbox{Normal}(0, 2.5) \\
 \gamma &\sim \mbox{Normal}(0, 2.5) \\
+\theta &\sim \mbox{Normal}(0, 2.5) \\
+\phi &\sim \mbox{Normal}(0, 2.5) \\
+\kappa &\sim \mbox{Normal}(0, 2.5) \\
 \sigma &\sim \mbox{Exponential}(1)
 \end{align}
 
 We run the model in R [@citeR] using the `rstanarm` package of @rstanarm. We use the default priors from `rstanarm`.
 
-## Model preduction
+### Model justification
+
+We expect a positive relationship between the statistics of the player and price of their rookie trading card. Usually, if a player plays better, the price of their Rookie Card should increase, therefore we will use a linear regression model.
+
+## Model prediction
+
+I will create a test data set for 2024-2025 and 2026-2027 season and use the model with this test data set to predict the price of these players using their own model. In @tbl-5, @tbl-6, and @tbl-7 are the predicted data based by improving the players statistics slightly. 
+
+### Tyrese Maxey prediction
 
 ```{r}
 #| echo: false
 #| warning: false
+
+Months <- c("2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", 
+       "2025-04-01", "2026-10-01", "2026-11-01", "2026-12-01", "2027-01-01", "2027-02-01", "2027-03-01", "2027-04-01")
+
+Months_data <- format(as.Date(Months), "%Y-%m")
 
 test_maxey <- tibble(
   REB = c(
@@ -173,36 +194,127 @@ test_maxey <- tibble(
   )
 )
 
-view(test_maxey)
 
 maxey_prediction <- predict(maxey_model, newdata = test_maxey)
 
+# code found to turn table from veticle to horizontal: https://youtu.be/dE6Z3mJdero
+
+maxey_prediction_table <- data.frame(maxey_prediction)
+maxey_prediction_table <- add_column(maxey_prediction_table, Months_data)
+
+colnames(maxey_prediction_table) <- c("Predicted Price", "Month")
 ```
 
 
 ```{r}
-#| label: tbl-5
-#| tbl-cap: This table is the prediction price of Tyrese Maxey RC Prizm Silver card using the model 
+#| label: tbl-5 
+#| tbl-cap: This table is the prediction price of Tyrese Maxey RC Prizm Silver card using the model
 #| echo: false
 #| warning: false
 
-kable(maxey_prediction, padding = 5)
+kable(maxey_prediction_table, padding = 5)
 
-view(maxey_prediction)
 ```
 
+### Tyrese Haliburton prediction
+
+```{r}
+#| echo: false
+#| warning: false
+
+test_haliburton <- tibble(
+  REB = c(
+    4.5, 4.3, 5.1, 3.1, 4.5, 5.6, 7.8, 4.5, 6.5, 4.1, 4.3, 6.5, 5.8, 5.5
+  ),
+  AST = c(
+    4.5, 4.3, 5.1, 3.1, 4.5, 5.6, 7.8, 4.5, 6.5, 4.1, 4.3, 6.5, 5.8, 5.5
+  ),
+  BLK = c(
+    4.5, 4.3, 5.1, 3.1, 4.5, 2.6, 3.8, 4.5, 2.5, 4.1, 4.3, 4.5, 5.8, 5.5
+  ),
+  STL = c(
+    4.5, 4.3, 2.1, 3.1, 4.5, 2.6, 4.8, 4.5, 6.5, 4.1, 4.3, 4.5, 2.8, 4.5
+  ),
+  PTS = c(
+    20, 25, 10, 30, 25, 20, 30, 35, 20, 15, 35, 30, 35, 20 
+  )
+)
 
 
-### Model justification
+haliburton_prediction <- predict(haliburton_model, newdata = test_haliburton)
 
-We expect a positive relationship between the size of the wings and time spent aloft. In particular...
+# code found to turn table from vertical to horizontal: https://youtu.be/dE6Z3mJdero
 
-We can use maths by including latex between dollar signs, for instance $\theta$.
+haliburton_prediction_table <- data.frame(haliburton_prediction)
+haliburton_prediction_table <- add_column(haliburton_prediction_table, Months_data)
+
+colnames(haliburton_prediction_table) <- c("Predicted Price", "Month")
+
+view(haliburton_prediction_table)
+```
+
+```{r}
+#| label: tbl-6
+#| tbl-cap: This table is the prediction price of Tyrese Haliburton RC Prizm Silver card using the model
+#| echo: false
+#| warning: false
+
+kable(haliburton_prediction_table, padding = 5)
+
+```
+
+### Anthony Edward prediction
+
+```{r}
+#| echo: false
+#| warning: false
+
+test_anthony <- tibble(
+  REB = c(
+    4.5, 4.3, 5.1, 3.1, 4.5, 5.6, 7.8, 4.5, 6.5, 4.1, 4.3, 6.5, 5.8, 5.5
+  ),
+  AST = c(
+    4.5, 4.3, 5.1, 3.1, 4.5, 5.6, 7.8, 4.5, 6.5, 4.1, 4.3, 6.5, 5.8, 5.5
+  ),
+  BLK = c(
+    4.5, 4.3, 5.1, 3.1, 4.5, 2.6, 3.8, 4.5, 2.5, 4.1, 4.3, 4.5, 5.8, 5.5
+  ),
+  STL = c(
+    4.5, 4.3, 2.1, 3.1, 4.5, 2.6, 4.8, 4.5, 6.5, 4.1, 4.3, 4.5, 2.8, 4.5
+  ),
+  PTS = c(
+    20, 25, 10, 30, 25, 20, 30, 35, 20, 15, 35, 30, 35, 20 
+  )
+)
+
+
+anthony_prediction <- predict(anthony_model, newdata = test_anthony)
+
+# code found to turn table from vertical to horizontal: https://youtu.be/dE6Z3mJdero
+
+anthony_prediction_table <- data.frame(anthony_prediction)
+anthony_prediction_table <- add_column(anthony_prediction_table, Months_data)
+
+colnames(anthony_prediction_table) <- c("Predicted Price", "Month")
+
+view(anthony_prediction_table)
+```
+
+```{r}
+#| label: tbl-7
+#| tbl-cap: This table is the prediction price of Anthony Edward RC Prizm Silver card using the model
+#| echo: false
+#| warning: false
+
+kable(anthony_prediction_table, padding = 5)
+
+```
 
 
 # Results
 
 ## Average player statistics 
+
 
 ## Price trend ratio to player average
 
@@ -210,9 +322,9 @@ We can use maths by including latex between dollar signs, for instance $\theta$.
 
 # Discussion
 
-## First discussion point {#sec-first-point}
+## First discussion point
 
-If my paper were 10 pages, then should be be at least 2.5 pages. The discussion is a chance to show off what you know and what you learnt from all this. 
+If my paper were 10 pages, then should be be at least 2.5 pages. The discussion is a chance to show off what you know and what you learnt from all this.
 
 ## Second discussion point
 
@@ -235,11 +347,21 @@ Weaknesses and next steps should also be included. More player should be added i
 ```{r}
 library(rstanarm)
 
-pp_check(maxey_model) +
+pp_check(haliburton_model) +
   theme_classic() +
   theme(legend.position = "bottom")
 
-posterior_vs_prior(maxey_model) +
+posterior_vs_prior(haliburton_model) +
+  theme_minimal() +
+  scale_color_brewer(palette = "Set1") +
+  theme(legend.position = "bottom") +
+  coord_flip()
+
+pp_check(anthony_model) +
+  theme_classic() +
+  theme(legend.position = "bottom")
+
+posterior_vs_prior(anthony_model) +
   theme_minimal() +
   scale_color_brewer(palette = "Set1") +
   theme(legend.position = "bottom") +

@@ -35,6 +35,7 @@ temp_haliburton_price <-
 
 haliburton_and_price <- add_column(haliburton, temp_haliburton_price)
 
+view(haliburton_and_price)
 
 # creating data set for anthony edward
 temp_anthony_price <-
@@ -43,7 +44,7 @@ temp_anthony_price <-
 
 anthony_and_price <- add_column(anthony, temp_anthony_price)
 
-
+view(anthony_and_price)
 ### Model data ####
 
 ## Maxey Model ##
@@ -81,8 +82,6 @@ anthony_model <-
     prior_aux = exponential(rate = 1, autoscale = TRUE),
     seed = 888
   )
-
-
 
 
 
