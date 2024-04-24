@@ -78,9 +78,19 @@ clean_maxey <- rbind(temp_maxey_2022, temp_maxey_2023)|>
     PTS = X17
   )
 
+clean_maxey <-
+  clean_maxey |>
+  mutate(
+    REB = as.double(REB),
+    AST = as.double(AST),
+    BLK = as.double(BLK),
+    STL = as.double(STL),
+    PTS = as.double(PTS),
+  )
+
+
 clean_maxey <- add_column(clean_maxey, Months, .before = "REB")
   
-view(clean_maxey)
 
 # clean lamelo data and combine it #
 lamelo_2022 <- read_csv("data/raw_data/lamelo_data_2022.csv")
@@ -164,6 +174,15 @@ clean_haliburton <- rbind(temp_haliburton_2022, temp_haliburton_2023)|>
     PTS = X17
   )
 
+clean_haliburton <-
+  clean_haliburton |>
+    mutate(
+      REB = as.double(REB),
+      AST = as.double(AST),
+      BLK = as.double(BLK),
+      STL = as.double(STL),
+      PTS = as.double(PTS),
+    )
 
 clean_haliburton <- add_column(clean_haliburton, Months, .before = "REB")
 
@@ -205,6 +224,17 @@ clean_anthony_edward <- rbind(temp_anthony_edward_2022, temp_anthony_edward_2023
     STL = X14,
     PTS = X17
   )
+
+clean_anthony_edward <-
+  clean_anthony_edward |>
+  mutate(
+    REB = as.double(REB),
+    AST = as.double(AST),
+    BLK = as.double(BLK),
+    STL = as.double(STL),
+    PTS = as.double(PTS),
+  )
+
 
 clean_anthony_edward <- add_column(clean_anthony_edward, Months, .before = "REB")
 

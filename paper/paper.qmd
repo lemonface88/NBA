@@ -175,7 +175,7 @@ We expect a positive relationship between the statistics of the player and price
 
 ## Model prediction
 
-I will create a test data set for 2024-2025 and 2026-2027 season and use the model with this test data set to predict the price of these players using their own model. In @tbl-5, @tbl-6, and @tbl-7 are the predicted data based by improving the players statistics slightly. 
+I will create a test data set for 2024-2025 and 2026-2027 season and use the model with this test data set to predict the price of these players using their own model. In @tbl-5, @tbl-6, and @tbl-7 are the predicted data based by improving the players statistics slightly. The mock data wick use the original data from 2022 to 2024 with an increase of 2% each month to see if increasing performance statistics have an impact on the card price.
 
 ### Tyrese Maxey prediction
 
@@ -188,26 +188,26 @@ Months <- c("2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01"
 
 Months_data <- format(as.Date(Months), "%Y-%m")
 
-test_maxey <- tibble(
-  REB = c(
-    4.5, 4.3, 5.1, 3.1, 4.5, 5.6, 7.8, 4.5, 6.5, 4.1, 4.3, 6.5, 5.8, 5.5
-  ),
-  AST = c(
-    4.5, 4.3, 5.1, 3.1, 4.5, 5.6, 7.8, 4.5, 6.5, 4.1, 4.3, 6.5, 5.8, 5.5
-  ),
-  BLK = c(
-    4.5, 4.3, 5.1, 3.1, 4.5, 5.6, 7.8, 4.5, 6.5, 4.1, 4.3, 6.5, 5.8, 5.5
-  ),
-  STL = c(
-    4.5, 4.3, 5.1, 3.1, 4.5, 5.6, 7.8, 4.5, 6.5, 4.1, 4.3, 6.5, 5.8, 5.5
-  ),
-  PTS = c(
-    20, 25, 40, 30, 45, 20, 30, 35, 20, 15, 35, 30, 35, 20 
-  )
-)
+test_maxey_price_only <- clean_maxey[, -1]
 
 
-maxey_prediction <- predict(maxey_model, newdata = test_maxey)
+test_maxey_price_only[1, ] <- (test_maxey_price_only[1, ])*1.02
+test_maxey_price_only[2, ] <- (test_maxey_price_only[2, ])*1.04
+test_maxey_price_only[3, ] <- (test_maxey_price_only[3, ])*1.06
+test_maxey_price_only[4, ] <- (test_maxey_price_only[4, ])*1.08
+test_maxey_price_only[5, ] <- (test_maxey_price_only[5, ])*1.10
+test_maxey_price_only[6, ] <- (test_maxey_price_only[6, ])*1.12
+test_maxey_price_only[7, ] <- (test_maxey_price_only[7, ])*1.14
+test_maxey_price_only[8, ] <- (test_maxey_price_only[8, ])*1.16
+test_maxey_price_only[9, ] <- (test_maxey_price_only[9, ])*1.18
+test_maxey_price_only[10, ] <- (test_maxey_price_only[10, ])*1.20
+test_maxey_price_only[11, ] <- (test_maxey_price_only[1, ])*1.22
+test_maxey_price_only[12, ] <- (test_maxey_price_only[12, ])*1.24
+test_maxey_price_only[13, ] <- (test_maxey_price_only[13, ])*1.26
+test_maxey_price_only[14, ] <- (test_maxey_price_only[14, ])*1.28
+
+
+maxey_prediction <- predict(maxey_model, newdata = test_maxey_price_only)
 
 # code found to turn table from veticle to horizontal: https://youtu.be/dE6Z3mJdero
 
@@ -234,26 +234,25 @@ kable(maxey_prediction_table, padding = 5)
 #| echo: false
 #| warning: false
 
-test_haliburton <- tibble(
-  REB = c(
-    4.5, 4.3, 5.1, 3.1, 4.5, 5.6, 7.8, 4.5, 6.5, 4.1, 4.3, 6.5, 5.8, 5.5
-  ),
-  AST = c(
-    4.5, 4.3, 5.1, 3.1, 4.5, 5.6, 7.8, 4.5, 6.5, 4.1, 4.3, 6.5, 5.8, 5.5
-  ),
-  BLK = c(
-    4.5, 4.3, 5.1, 3.1, 4.5, 2.6, 3.8, 4.5, 2.5, 4.1, 4.3, 4.5, 5.8, 5.5
-  ),
-  STL = c(
-    4.5, 4.3, 2.1, 3.1, 4.5, 2.6, 4.8, 4.5, 6.5, 4.1, 4.3, 4.5, 2.8, 4.5
-  ),
-  PTS = c(
-    20, 25, 10, 30, 25, 20, 30, 35, 20, 15, 35, 30, 35, 20 
-  )
-)
+test_haliburton_price_only <- clean_haliburton[, -1]
 
 
-haliburton_prediction <- predict(haliburton_model, newdata = test_haliburton)
+test_haliburton_price_only[1, ] <- (test_haliburton_price_only[1, ])*1.02
+test_haliburton_price_only[2, ] <- (test_haliburton_price_only[2, ])*1.04
+test_haliburton_price_only[3, ] <- (test_haliburton_price_only[3, ])*1.06
+test_haliburton_price_only[4, ] <- (test_haliburton_price_only[4, ])*1.08
+test_haliburton_price_only[5, ] <- (test_haliburton_price_only[5, ])*1.10
+test_haliburton_price_only[6, ] <- (test_haliburton_price_only[6, ])*1.12
+test_haliburton_price_only[7, ] <- (test_haliburton_price_only[7, ])*1.14
+test_haliburton_price_only[8, ] <- (test_haliburton_price_only[8, ])*1.16
+test_haliburton_price_only[9, ] <- (test_haliburton_price_only[9, ])*1.18
+test_haliburton_price_only[10, ] <- (test_haliburton_price_only[10, ])*1.20
+test_haliburton_price_only[11, ] <- (test_haliburton_price_only[1, ])*1.22
+test_haliburton_price_only[12, ] <- (test_haliburton_price_only[12, ])*1.24
+test_haliburton_price_only[13, ] <- (test_haliburton_price_only[13, ])*1.26
+test_haliburton_price_only[14, ] <- (test_haliburton_price_only[14, ])*1.28
+
+haliburton_prediction <- predict(haliburton_model, newdata = test_haliburton_price_only)
 
 # code found to turn table from vertical to horizontal: https://youtu.be/dE6Z3mJdero
 
@@ -279,26 +278,26 @@ kable(haliburton_prediction_table, padding = 5)
 #| echo: false
 #| warning: false
 
-test_anthony <- tibble(
-  REB = c(
-    4.5, 4.3, 5.1, 3.1, 4.5, 5.6, 7.8, 4.5, 6.5, 4.1, 4.3, 6.5, 5.8, 5.5
-  ),
-  AST = c(
-    4.5, 4.3, 5.1, 3.1, 4.5, 5.6, 7.8, 4.5, 6.5, 4.1, 4.3, 6.5, 5.8, 5.5
-  ),
-  BLK = c(
-    4.5, 4.3, 5.1, 3.1, 4.5, 2.6, 3.8, 4.5, 2.5, 4.1, 4.3, 4.5, 5.8, 5.5
-  ),
-  STL = c(
-    4.5, 4.3, 2.1, 3.1, 4.5, 2.6, 4.8, 4.5, 6.5, 4.1, 4.3, 4.5, 2.8, 4.5
-  ),
-  PTS = c(
-    20, 25, 10, 30, 25, 20, 30, 35, 20, 15, 35, 30, 35, 20 
-  )
-)
+test_anthony_price_only <- clean_anthony_edward[, -1]
 
 
-anthony_prediction <- predict(anthony_model, newdata = test_anthony)
+test_anthony_price_only[1, ] <- (test_anthony_price_only[1, ])*1.02
+test_anthony_price_only[2, ] <- (test_anthony_price_only[2, ])*1.04
+test_anthony_price_only[3, ] <- (test_anthony_price_only[3, ])*1.06
+test_anthony_price_only[4, ] <- (test_anthony_price_only[4, ])*1.08
+test_anthony_price_only[5, ] <- (test_anthony_price_only[5, ])*1.10
+test_anthony_price_only[6, ] <- (test_anthony_price_only[6, ])*1.12
+test_anthony_price_only[7, ] <- (test_anthony_price_only[7, ])*1.14
+test_anthony_price_only[8, ] <- (test_anthony_price_only[8, ])*1.16
+test_anthony_price_only[9, ] <- (test_anthony_price_only[9, ])*1.18
+test_anthony_price_only[10, ] <- (test_anthony_price_only[10, ])*1.20
+test_anthony_price_only[11, ] <- (test_anthony_price_only[1, ])*1.22
+test_anthony_price_only[12, ] <- (test_anthony_price_only[12, ])*1.24
+test_anthony_price_only[13, ] <- (test_anthony_price_only[13, ])*1.26
+test_anthony_price_only[14, ] <- (test_anthony_price_only[14, ])*1.28
+
+
+anthony_prediction <- predict(anthony_model, newdata = test_anthony_price_only)
 
 # code found to turn table from vertical to horizontal: https://youtu.be/dE6Z3mJdero
 
@@ -307,7 +306,6 @@ anthony_prediction_table <- add_column(anthony_prediction_table, Months_data)
 
 colnames(anthony_prediction_table) <- c("Predicted Price", "Month")
 
-view(anthony_prediction_table)
 ```
 
 ```{r}
@@ -323,7 +321,7 @@ kable(anthony_prediction_table, padding = 5)
 
 # Results
 
-## Average player statistics 
+## Price of increasing performance
 
 
 ## Price trend ratio to player average
