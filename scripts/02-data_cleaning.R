@@ -208,17 +208,44 @@ clean_anthony_edward <- rbind(temp_anthony_edward_2022, temp_anthony_edward_2023
 
 clean_anthony_edward <- add_column(clean_anthony_edward, Months, .before = "REB")
 
-view(clean_anthony_edward)
+
+## Create data for model ##
+
+## creating data set for tyrese maxey
+temp_maxey_price <-
+  price_data|>
+  select(`Tyrese Maxey`)
+
+maxey_and_price <- add_column(clean_maxey, temp_maxey_price)
+
+
+## creating data set for tyrese haliburton
+temp_haliburton_price <-
+  price_data|>
+  select(`Tyrese Haliburton`)
+
+haliburton_and_price <- add_column(clean_haliburton, temp_haliburton_price)
+
+
+# creating data set for anthony edward
+temp_anthony_price <-
+  price_data|>
+  select(`Anthony Edward`)
+
+anthony_and_price <- add_column(clean_anthony_edward, temp_anthony_price)
+
 #### Save data ####
 
 # becase of errors that occur throughout the attemts to save files as  parquet, the files will not be saved as parquet format. 
 #Error in parquet___WriterProperties___Builder__create() : 
 #Cannot call parquet___WriterProperties___Builder__create(). See https://arrow.apache.org/docs/r/articles/install.html for help installing Arrow C++ libraries. 
 
-view(clean_maxey)
 write_csv(clean_maxey, "data/analysis_data/clean_maxey.csv")
 write_csv(clean_haliburton, "data/analysis_data/clean_haliburton.csv")
 write_csv(clean_anthony_edward, "data/analysis_data/clean_anthony_edward.csv")
 write_csv(clean_price_data, "data/analysis_data/clean_price_data.csv")
 
+write_csv(maxey_and_price, "data/analysis_data/maxey_and_price.csv")
+write_csv(haliburton_and_price, "data/analysis_data/haliburton_and_price.csv")
+write_csv(anthony_and_price, "data/analysis_data/anthony_and_price.csv")
 

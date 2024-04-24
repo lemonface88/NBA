@@ -12,12 +12,6 @@ number-sections: true
 bibliography: references.bib
 ---
 ```{r}
-#library(readr)
-#write_bib()
-```
-
-
-```{r}
 #| include: false
 #| warning: false
 #| message: false
@@ -29,6 +23,8 @@ library(palmerpenguins)
 library(knitr)
 library(rstanarm)
 
+library(readr)
+#write_bib()
 
 # load data
 anthony_edward = read_csv(
@@ -50,6 +46,22 @@ price_data = read_csv(
   file = "/Users/harrison/NBA/data/analysis_data/clean_price_data.csv",
   show_col_types = FALSE
 )
+
+maxey_and_price = read_csv(
+  file = "/Users/harrison/NBA/data/analysis_data/maxey_and_price.csv",
+  show_col_types = FALSE
+)
+
+haliburton_and_price = read_csv(
+  file = "/Users/harrison/NBA/data/analysis_data/haliburton_and_price.csv",
+  show_col_types = FALSE
+)
+
+anthony_and_price = read_csv(
+  file = "/Users/harrison/NBA/data/analysis_data/anthony_and_price.csv",
+  show_col_types = FALSE
+)
+
 
 maxey_model <- read_rds("/Users/harrison/NBA/models/maxey_model.rds")
 haliburton_model <- read_rds("/Users/harrison/NBA/models/haliburton_model.rds")
@@ -96,7 +108,7 @@ Below is a brief explination of the tables including player statistics:
 #| echo: false
 #| warning: false
 
-head(anthony_edward, padding = 5)
+kable(anthony_edward, padding = 5)
 ```
 
 ```{r}
@@ -105,7 +117,7 @@ head(anthony_edward, padding = 5)
 #| echo: false
 #| warning: false
 
-head(anthony_edward, padding = 5)
+kable(maxey, padding = 5)
 ```
 
 ```{r}
@@ -114,7 +126,7 @@ head(anthony_edward, padding = 5)
 #| echo: false
 #| warning: false
 
-head(anthony_edward, padding = 5)
+kable(haliburton, padding = 5)
 ```
 
 In @tbl-1, @tbl-2, and  @tbl-3 are the three player statistics data that will be used in the model.
@@ -127,7 +139,7 @@ In @tbl-1, @tbl-2, and  @tbl-3 are the three player statistics data that will be
 #| echo: false
 #| warning: false
 
-head(price_data, padding = 5)
+kable(price_data, padding = 5)
 ```
 
 The table above @tbl-4 includes the card price. The player card price is from a website called Sportscardpro, they collect data from eBay's successful transactions of the card and gather them onto their website. Since there was no table to download the data, I had to manually create an Excel file with the data presented on the website and then import it into rStudio. The price focuses on the PSA 10 and Prizm Silver series of that specific player's rookie card. Initially, I was going to include data for Zion and LaMelo, however, due to injuries that occurred throughout their career, the player statistics were inconsistent and had a lot of missing months. For those reasons, I will only be following forward with Tyrese Maxey, Tyrese Haliburton, and Anthony Edward. 
@@ -250,7 +262,6 @@ haliburton_prediction_table <- add_column(haliburton_prediction_table, Months_da
 
 colnames(haliburton_prediction_table) <- c("Predicted Price", "Month")
 
-view(haliburton_prediction_table)
 ```
 
 ```{r}
@@ -260,7 +271,6 @@ view(haliburton_prediction_table)
 #| warning: false
 
 kable(haliburton_prediction_table, padding = 5)
-
 ```
 
 ### Anthony Edward prediction
@@ -345,7 +355,12 @@ Weaknesses and next steps should also be included. More player should be added i
 ## Model Check
 
 ```{r}
-library(rstanarm)
+#| include: true
+#| eval: true
+#| echo: false
+#| message: false
+#| warning: false
+
 
 pp_check(maxey_model) +
   theme_classic() +

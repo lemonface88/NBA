@@ -14,37 +14,12 @@ library(rstanarm)
 library(arrow)
 
 #### Read data ####
-price_data <- read_csv("data/analysis_data/clean_price_data.csv")
 
-maxey <- read_csv("data/analysis_data/clean_maxey.csv")
-haliburton <- read_csv("data/analysis_data/clean_haliburton.csv")
-anthony <- read_csv("data/analysis_data/clean_anthony_edward.csv")
-
-## creating data set for tyrese maxey
-temp_maxey_price <-
-  price_data|>
-  select(`Tyrese Maxey`)
-
-maxey_and_price <- add_column(maxey, temp_maxey_price)
+maxey_and_price <- read_csv("data/analysis_data/maxey_and_price.csv")
+haliburton_and_price <- read_csv("data/analysis_data/haliburton_and_price.csv")
+anthony_and_price <- read_csv("data/analysis_data/anthony_and_price.csv")
 
 
-## creating data set for tyrese haliburton
-temp_haliburton_price <-
-  price_data|>
-  select(`Tyrese Haliburton`)
-
-haliburton_and_price <- add_column(haliburton, temp_haliburton_price)
-
-view(haliburton_and_price)
-
-# creating data set for anthony edward
-temp_anthony_price <-
-  price_data|>
-  select(`Anthony Edward`)
-
-anthony_and_price <- add_column(anthony, temp_anthony_price)
-
-view(anthony_and_price)
 ### Model data ####
 
 ## Maxey Model ##
@@ -101,4 +76,5 @@ saveRDS(
   anthony_model,
   file = "models/anthony_model.rds"
 )
+
 
