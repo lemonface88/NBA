@@ -188,7 +188,7 @@ Months <- c("2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01"
 
 Months_data <- format(as.Date(Months), "%Y-%m")
 
-test_maxey_price_only <- clean_maxey[, -1]
+test_maxey_price_only <- maxey[, -1]
 
 
 test_maxey_price_only[1, ] <- (test_maxey_price_only[1, ])*1.02
@@ -234,7 +234,7 @@ kable(maxey_prediction_table, padding = 5)
 #| echo: false
 #| warning: false
 
-test_haliburton_price_only <- clean_haliburton[, -1]
+test_haliburton_price_only <- haliburton[, -1]
 
 
 test_haliburton_price_only[1, ] <- (test_haliburton_price_only[1, ])*1.02
@@ -278,7 +278,7 @@ kable(haliburton_prediction_table, padding = 5)
 #| echo: false
 #| warning: false
 
-test_anthony_price_only <- clean_anthony_edward[, -1]
+test_anthony_price_only <- anthony_edward[, -1]
 
 
 test_anthony_price_only[1, ] <- (test_anthony_price_only[1, ])*1.02
@@ -321,8 +321,114 @@ kable(anthony_prediction_table, padding = 5)
 
 # Results
 
-## Price of increasing performance
+## Tyrese Maxey Preduction
+```{r}
+#| label: fig-1
+#| fig-cap: The comparision between past season versus predicted improving season
+#| fig-subcap: ["Amount of Power Plays", "Effectiveness of Power Plays"]
+#| echo: false
+#| warning: false
+#| layout-ncol: 2
 
+library(ggplot2)
+
+maxey_prediction_table |> ggplot(aes(x = `Month`, y = `Predicted Price`)) + 
+  geom_line(group =1) +
+  theme(axis.text.x = element_text(angle = 45, vjust = 0.9, hjust=1)) +
+  labs(
+    title = "Predicted price of future seasons with improving performance",
+    x = "Dates",
+    y = "Price"
+    
+  )+ 
+  geom_point() +
+  geom_smooth(method=lm)
+
+price_data |> ggplot(aes(x = `Date`, y = `Tyrese Maxey`)) + 
+  geom_line(group = 1) +
+  theme(axis.text.x = element_text(angle = 45, vjust = 0.9, hjust=1)) +
+  labs(
+    title = "Predicted price of future seasons with improving performance",
+    x = "Dates",
+    y = "Price"
+    
+  )
+
+
+```
+
+## Tyrese Haliburton Preduction
+```{r}
+#| label: fig-2
+#| fig-cap: The comparision between past season versus predicted improving season
+#| fig-subcap: ["Amount of Power Plays", "Effectiveness of Power Plays"]
+#| echo: false
+#| warning: false
+#| layout-ncol: 2
+
+library(ggplot2)
+
+haliburton_prediction_table |> ggplot(aes(x = `Month`, y = `Predicted Price`)) + 
+  geom_line(group =1) +
+  theme(axis.text.x = element_text(angle = 45, vjust = 0.9, hjust=1)) +
+  labs(
+    title = "Predicted price of future seasons with improving performance",
+    x = "Dates",
+    y = "Price"
+    
+  )+ 
+  geom_point() +
+  geom_smooth(method=lm)
+
+price_data |> ggplot(aes(x = `Date`, y = `Tyrese Haliburton`)) + 
+  geom_line(group = 1) +
+  theme(axis.text.x = element_text(angle = 45, vjust = 0.9, hjust=1)) +
+  labs(
+    title = "Predicted price of future seasons with improving performance",
+    x = "Dates",
+    y = "Price"
+    
+  )
+
+
+```
+
+## Anthony Edward Prediction
+
+```{r}
+#| label: fig-3
+#| fig-cap: The comparision between past season versus predicted improving season
+#| fig-subcap: ["Amount of Power Plays", "Effectiveness of Power Plays"]
+#| echo: false
+#| warning: false
+#| layout-ncol: 2
+
+library(ggplot2)
+
+anthony_prediction_table |> ggplot(aes(x = `Month`, y = `Predicted Price`)) + 
+  geom_line(group =1) +
+  theme(axis.text.x = element_text(angle = 45, vjust = 0.9, hjust=1)) +
+  labs(
+    title = "Predicted price of future seasons with improving performance",
+    x = "Dates",
+    y = "Price"
+    
+  )+ 
+  geom_point() +
+  geom_smooth(method=lm)
+
+price_data |> ggplot(aes(x = `Date`, y = `Anthony Edward`)) + 
+  geom_line(group = 1) +
+  theme(axis.text.x = element_text(angle = 45, vjust = 0.9, hjust=1)) +
+  labs(
+    title = "Predicted price of future seasons with improving performance",
+    x = "Dates",
+    y = "Price"
+    
+  )
+
+
+```
 
 
 
