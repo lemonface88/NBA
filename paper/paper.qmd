@@ -347,6 +347,16 @@ Weaknesses and next steps should also be included. More player should be added i
 ```{r}
 library(rstanarm)
 
+pp_check(maxey_model) +
+  theme_classic() +
+  theme(legend.position = "bottom")
+
+posterior_vs_prior(maxey_model) +
+  theme_minimal() +
+  scale_color_brewer(palette = "Set1") +
+  theme(legend.position = "bottom") +
+  coord_flip()
+
 pp_check(haliburton_model) +
   theme_classic() +
   theme(legend.position = "bottom")
