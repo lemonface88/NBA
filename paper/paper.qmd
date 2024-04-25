@@ -443,14 +443,14 @@ The behavior of a player outside the league is also very crucial in terms of thi
 
 The time frame also plays a crucial role in prices of many items in our every day life. For example, the rent price in Toronto starting May is lower compared to September from my past experience. This is due to the mass fluctuation of students leaving Toronto in May and coming back to Toronto in September. Timing and price in this case also plays a role in the change or card prices. 
 
-After taking a closer look at trends from both predicted and past data, an interesting point came up mind. When observing turning points of the price, they all seems to be the start and end of a season. Price increasing trends tends to happen at the start of each season, and then become more and more unpredictable throughout the season. This brings attention to the timing of the season and the price may be quite related and even more than the player statistics. Because despite implementing an increasing performance for each of the player statistics to run the model on, there are no clear signs of increasing price overall. The thing that stood out the most is the price increase at the start of every season in October. This could suggest that the initial hype of a new season could be contrbuting to the increase of the card price. 
+After taking a closer look at trends from both predicted and past data, an interesting point came up mind. When observing turning points of the price, they all seems to be the start and end of a season. Price increasing trends tends to happen at the start of each season, and then become more and more unpredictable throughout the season. This brings attention to the timing of the season and the price may be quite related and even more than the player statistics. Because despite implementing an increasing performance for each of the player statistics to run the model on, there are no clear signs of increasing price overall. The thing that stood out the most is the price increase at the start of every season in October. This could suggest that the initial hype of a new season could be contributing to the increase of the card price. 
 
 
 ## Weaknesses and next steps
 
 Since there isn’t a major platform that provides the tracking of every transaction of a card, it is very difficult to obtain the true price of the card. Sportscardpro only gathers its data from completed transactions of that card on eBay, which is only a portion of the sales that happen on the internet. Transactions of the card that often happen offline in stores are also not tracked, if I sold a card to my friend for a cheaper price, it is not reflected in the data set from @Sportscardpro. 
 
-Future steps would include categorizing each player based on their positions and giving weight to the statistics that would have a better indication of their performance. For example, giving more weight to the average number of blocks per game for defensive players. Upon taking a look at @fig-4, @fig-5, and @fig-6, the fit of the data are not very good. Another step would be the incorporation of other models to find better fits, because of the complex relationship between the price and the player statistics, a more sophisticated model may be needed. I think also using an average of all the player's statistics and price data and compare them to individual model would also be something beneficial, exploring the overall relationship rather than one at a time. Overall, this analysis gives insgitht to how complex the relationship is and that a lot more work would be required to be done. 
+Future steps would include categorizing each player based on their positions and giving weight to the statistics that would have a better indication of their performance. For example, giving more weight to the average number of blocks per game for defensive players. Upon taking a look at @sec-modelcheck, the fit of the data are not very good. Another step would be the incorporation of other models to find better fits, because of the complex relationship between the price and the player statistics, a more sophisticated model may be needed. I think also using an average of all the player's statistics and price data and compare them to individual model would also be something beneficial, exploring the overall relationship rather than one at a time. Overall, this analysis gives insgitht to how complex the relationship is and that a lot more work would be required to be done. 
 
 
 
@@ -460,7 +460,7 @@ Future steps would include categorizing each player based on their positions and
 
 # Appendix
 
-## Model Check
+## Model Check {#sec-modelcheck}
 
 ```{r}
 #| label: fig-4
