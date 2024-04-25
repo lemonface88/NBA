@@ -77,7 +77,7 @@ Many factors go into the valuation of a basketball card. Some example factors in
 
 This analysis finds that there are a lot more than performance linking to the price of the rookie card. The performance statistics is only a some of the reasons fluctuating card prices. There are so much more than just the performance of the rookie when taking in consideration of price analysis. Future steps will needed in order to take a look at more factors that may affect the price of the rookie card of that specific player. 
 
-	In Section 2 of the paper, the source and data sets are discussed. Strengths and weaknesses, methods of collection, and terminologies will be explored. Section 3 of the paper will incorporate a model aiming to use player statistics to predict the price trend of the card. Section 4 will then look at the results from the model. Lastly, section 5 will be a reflection about possible steps and the discussion of the strengths and weaknesses of this analysis. 
+In Section 2 of the paper, the source and data sets are discussed. Strengths and weaknesses, methods of collection, and terminologies will be explored. Section 3 of the paper will incorporate a model aiming to use player statistics to predict the price trend of the card. Section 4 will then look at the results from the model. Lastly, section 5 will be a reflection about possible steps and the discussion of the strengths and weaknesses of this analysis. 
 
 
 # Data
@@ -86,7 +86,7 @@ The first place the data was collected from is @ESPN, player statistics were obt
 
 The second source of the data came from Sportscardpro website. They collect data from eBay's successful transactions of the card and gather them onto their website. Since there was no table to download the data, I had to manually create an Excel file with the data presented on the website and then import it into rStudio. The price focuses on the PSA 10 and Prizm Silver series of that specific player's rookie card. 
 
-The analysis of these three datasets will be carried out using the statistical programming language `R` [@citeR], using the `tidyverse`[@citetidy], `here`[@citehere], and `readxl`[@citexl] packages. The figures and tables in the paper are generated using the, respectively, `ggplot2`[@citegg] and `knitr`[@citeknitr] packages.
+The analysis of these three datasets will be carried out using the statistical programming language `R` [@citeR], using the `tidyverse`[@tidyverse], `here`[@citehere], and `readxl`[@citexl] packages. The figures and tables in the paper are generated using the, respectively, `ggplot2`[@citegg] and `knitr`[@citeknitr] packages.
 
 
 ## Player Statistics

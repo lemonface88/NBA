@@ -10,7 +10,7 @@ I have been watching the NBA for many years now, and I also collect some basketb
 
 The repo is structured as:
 
--   `data/raw_data` contains the raw data as obtained from https://sportsdata.io/developers/api-documentation/nba#/sports-data-feeds
+-   `data/raw_data` contains the raw data as obtained from https://www.espn.com/nba/
 -   `data/analysis_data` contains the cleaned dataset that was constructed.
 -   `model` contains fitted models. 
 -   `other` contains relevant literature, details about LLM chat interactions, and sketches.
