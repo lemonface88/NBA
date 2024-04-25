@@ -1,6 +1,6 @@
 ---
 title: "Prizm Silver Rookie Cards"
-subtitle: "An Analysis using statistic performance of a specific player and their rookie card price"
+subtitle: "An Analysis Using Statistic Serformance of an Individual Player and Their Rookie Card Price"
 author: 
   - Harrison Huang
 thanks: "Code and data are available at: https://github.com/lemonface88/NBA"
@@ -86,7 +86,7 @@ The first place the data was collected from is @ESPN, player statistics were obt
 
 The second source of the data came from Sportscardpro website. They collect data from eBay's successful transactions of the card and gather them onto their website. Since there was no table to download the data, I had to manually create an Excel file with the data presented on the website and then import it into rStudio. The price focuses on the PSA 10 and Prizm Silver series of that specific player's rookie card. 
 
-The analysis of these three datasets will be carried out using the statistical programming language `R` [@citeR], using the `tidyverse`[@tidyverse], `here`[@citehere], and `readxl`[@citexl] packages. The figures and tables in the paper are generated using the, respectively, `ggplot2`[@citegg] and `knitr`[@citeknitr] packages.
+The analysis of these three data sets will be carried out using the statistical programming language `R` [@citeR], using the `here`[@R-here], and `readxl`[@citexl] packages. Various packages were used throughout the writing of this paper including `tidyverse` [@tidyverse], `arrow` [@arrow], `here` [@here], `ggmap` [@ggmap], `knitr` [@knitr], `dplyr` [@dplyr], `janitor` [@janitor], `lintr` [@lintr], and `rstanarm` [@rstanarm].    
 
 
 ## Player Statistics
@@ -435,16 +435,22 @@ In @fig-1, @fig-2, and @fig-3 the results are all very similar. The over all pri
 The player's performance does not have too much of a prediction factor in the price of their card. Overall, almost every player has a downward trend in price regardless of how they are performing in the league. I think this has to do with the initial overvaluation of the card. The quantity that is released into the market also plays a critical role in the price. As we know, the more supply, and if the demand can’t keep up with the supply, then the price will go down. With more packs of cards being opened every day, the number of cards being released into the market also increases. 
 
 ## Confounding variables
-The linear model may be too simple due to each player's positions and playstyles. Because we are assuming that the higher the statistics are the better a player is performing. However, basketball is not only about statistics. If a player is known and in charge of defensive plays, their blocks and rebounds may be more important compared to attack-oriented players. The behavior of a player outside the league is also very crucial in terms of this. Even though Ja Morant played well in the league, he had multiple occasions where he displayed illegal objects during his livestream on Instagram. This devastated his reputation overall and he also received game restrictions as punishment. His card price also plummeted from around 2000 to now at around 400 dollars.
+The linear model may be too simple due to each player's positions and play styles. Because we are assuming that the higher the statistics are the better a player is performing. However, basketball is not only about statistics. If a player is known and in charge of defensive plays, their blocks and rebounds may be more important compared to attack-oriented players. The mock data had in increase of 2% each month of each players statistics, which should lead to overall increase of the price if the statistics were all positively related to the price. The weight of an varibale might be overlooked or underlooked which could be casuing this issue. 
 
-## Season timing
-After taking a closer look at trends from both predicted and past data, an interesting point came up mind. When observing turning points of the price, they all seems to be the start and end of a season. Price increasing trends tends to happen at the start of each season, and then become more and more unpredictable throughout the season. This brings attention to the timing of the season and the price may be quite related and even more than the player statistics. Because despite implementing an increasing performance for each of the player statistics to run the model on, there are no clear signs of increasing price overall. The thing that stood out the most is the price increase at the start of every season in October. This could suggest that the initial hype of a new season could be contrbuting to the incresae of the card price.
+The behavior of a player outside the league is also very crucial in terms of this. Even though Ja Morant played well in the league, he had multiple occasions where he displayed illegal objects during his live stream on Instagram. This devastated his reputation overall and he also received game restrictions as punishment. His card price also plummeted from around 2000 to now at around 400 dollars.
+
+## Time and Price
+
+The time frame also plays a crucial role in prices of many items in our every day life. For example, the rent price in Toronto starting May is lower compared to September from my past experience. This is due to the mass fluctuation of students leaving Toronto in May and coming back to Toronto in September. Timing and price in this case also plays a role in the change or card prices. 
+
+After taking a closer look at trends from both predicted and past data, an interesting point came up mind. When observing turning points of the price, they all seems to be the start and end of a season. Price increasing trends tends to happen at the start of each season, and then become more and more unpredictable throughout the season. This brings attention to the timing of the season and the price may be quite related and even more than the player statistics. Because despite implementing an increasing performance for each of the player statistics to run the model on, there are no clear signs of increasing price overall. The thing that stood out the most is the price increase at the start of every season in October. This could suggest that the initial hype of a new season could be contrbuting to the increase of the card price. 
+
 
 ## Weaknesses and next steps
 
 Since there isn’t a major platform that provides the tracking of every transaction of a card, it is very difficult to obtain the true price of the card. Sportscardpro only gathers its data from completed transactions of that card on eBay, which is only a portion of the sales that happen on the internet. Transactions of the card that often happen offline in stores are also not tracked, if I sold a card to my friend for a cheaper price, it is not reflected in the data set from @Sportscardpro. 
 
-Future steps would include categorizing each player based on their positions and giving weight to the statistics that would have a better indication of their performance. For example, giving more weight to the average number of blocks per game for defensive players. Another step would be the incorporation of other models to find better fits, because of the complex relationship between the price and the player statistics, a more sophisticated model may be needed. 
+Future steps would include categorizing each player based on their positions and giving weight to the statistics that would have a better indication of their performance. For example, giving more weight to the average number of blocks per game for defensive players. Upon taking a look at @fig-4, @fig-5, and @fig-6, the fit of the data are not very good. Another step would be the incorporation of other models to find better fits, because of the complex relationship between the price and the player statistics, a more sophisticated model may be needed. I think also using an average of all the player's statistics and price data and compare them to individual model would also be something beneficial, exploring the overall relationship rather than one at a time. Overall, this analysis gives insgitht to how complex the relationship is and that a lot more work would be required to be done. 
 
 
 
