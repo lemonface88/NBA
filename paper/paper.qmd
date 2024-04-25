@@ -1,6 +1,6 @@
 ---
-title: "Performance of Rookie Can Predict Price of Their Rookie Prizm Silver Cards"
-subtitle: "My subtitle if needed"
+title: "Prizm Silver Rookie Cards"
+subtitle: "An Analysis using statistic performance of a specific player and their rookie card price"
 author: 
   - Harrison Huang
 thanks: "Code and data are available at: https://github.com/lemonface88/NBA"
@@ -24,7 +24,6 @@ library(knitr)
 library(rstanarm)
 
 library(readr)
-#write_bib()
 
 # load data
 anthony_edward = read_csv(
@@ -70,7 +69,6 @@ anthony_model <- read_rds("/Users/harrison/NBA/models/anthony_model.rds")
 ```
 
 
-
 # Introduction
 
 Collectible cards such as Pokemon, Yu-Gi-Oh! cards, and Sports cards still exist and are relevant in our world. In the digitized world we live in today, these physical cards are often forgotten. We have also heard wild stories about specific Pokemon cards selling for millions of dollars, the same applies to other collectible cards. NBA basketball cards have gained significant popularity in recent years. Apart from being collector's items, they have also become a form of investment for some individuals. 
@@ -84,7 +82,7 @@ This analysis finds that there are a lot more than performance linking to the pr
 
 # Data
 
-The first place the data was collected from is ESPN, player statistics were obtained from scrapping the website and picking out the right tables. Please be respectful if you decide to use it for any other purpose. Each player had multiple tables and I downloaded the tables and merged players’ 202202-2023 and 2023-2024 data. This allows all statistics to be viewed in one table. In addition, when considering which of the statistics to focus on, I asked an NBA reporter Lisa Kao for suggestions. She mentioned that average points, blocks, steals, and assists are the top 5 statistics focused on in the industry. Something to keep in mind is that these statistics presented are all positive statistics, which means that the higher the number the better the player has performed. 
+The first place the data was collected from is @ESPN, player statistics were obtained from scrapping the website and picking out the right tables. Please be respectful if you decide to use it for any other purpose. Each player had multiple tables and I downloaded the tables and merged players’ 202202-2023 and 2023-2024 data. This allows all statistics to be viewed in one table. In addition, when considering which of the statistics to focus on, I asked an NBA reporter Lisa Kao for suggestions. She mentioned that average points, blocks, steals, and assists are the top 5 statistics focused on in the industry. Something to keep in mind is that these statistics presented are all positive statistics, which means that the higher the number the better the player has performed. 
 
 The second source of the data came from Sportscardpro website. They collect data from eBay's successful transactions of the card and gather them onto their website. Since there was no table to download the data, I had to manually create an Excel file with the data presented on the website and then import it into rStudio. The price focuses on the PSA 10 and Prizm Silver series of that specific player's rookie card. 
 
@@ -93,7 +91,7 @@ The analysis of these three datasets will be carried out using the statistical p
 
 ## Player Statistics
 
-Below is a brief explination of the tables including player statistics:
+Below is a brief explanation of the tables including player statistics:
 
 1. The `REB` column refers to the number of rebounds the player average per game in that month.
 2. The `AST` column refers to the number of assists the player average per game in that month.
@@ -109,6 +107,7 @@ Below is a brief explination of the tables including player statistics:
 #| warning: false
 
 kable(anthony_edward, padding = 5)
+
 ```
 
 ```{r}
@@ -129,7 +128,9 @@ kable(maxey, padding = 5)
 kable(haliburton, padding = 5)
 ```
 
+
 In @tbl-1, @tbl-2, and  @tbl-3 are the three player statistics data that will be used in the model.
+
 
 ## Card Price statistics 
 
@@ -324,13 +325,12 @@ kable(anthony_prediction_table, padding = 5)
 ## Tyrese Maxey Preduction
 ```{r}
 #| label: fig-1
-#| fig-cap: The comparision between past season versus predicted improving season
-#| fig-subcap: ["Amount of Power Plays", "Effectiveness of Power Plays"]
+#| fig-cap: The comparision between past season versus predicted improving season of Tyrese Maxey
+#| fig-subcap: ["Model Predicted Price", "Price from 2022-2024 season"]
 #| echo: false
 #| warning: false
 #| layout-ncol: 2
 
-library(ggplot2)
 
 maxey_prediction_table |> ggplot(aes(x = `Month`, y = `Predicted Price`)) + 
   geom_line(group =1) +
@@ -340,15 +340,13 @@ maxey_prediction_table |> ggplot(aes(x = `Month`, y = `Predicted Price`)) +
     x = "Dates",
     y = "Price"
     
-  )+ 
-  geom_point() +
-  geom_smooth(method=lm)
+  )
 
 price_data |> ggplot(aes(x = `Date`, y = `Tyrese Maxey`)) + 
   geom_line(group = 1) +
   theme(axis.text.x = element_text(angle = 45, vjust = 0.9, hjust=1)) +
   labs(
-    title = "Predicted price of future seasons with improving performance",
+    title = "Price from 2022-2024 season",
     x = "Dates",
     y = "Price"
     
@@ -357,11 +355,12 @@ price_data |> ggplot(aes(x = `Date`, y = `Tyrese Maxey`)) +
 
 ```
 
+
 ## Tyrese Haliburton Preduction
 ```{r}
 #| label: fig-2
-#| fig-cap: The comparision between past season versus predicted improving season
-#| fig-subcap: ["Amount of Power Plays", "Effectiveness of Power Plays"]
+#| fig-cap: The comparision between past season versus predicted improving season of Tyrese Haliburton
+#| fig-subcap: ["Model Predicted Price", "Price from 2022-2024 season"]
 #| echo: false
 #| warning: false
 #| layout-ncol: 2
@@ -384,7 +383,7 @@ price_data |> ggplot(aes(x = `Date`, y = `Tyrese Haliburton`)) +
   geom_line(group = 1) +
   theme(axis.text.x = element_text(angle = 45, vjust = 0.9, hjust=1)) +
   labs(
-    title = "Predicted price of future seasons with improving performance",
+    title = "Price from 2022-2024 season",
     x = "Dates",
     y = "Price"
     
@@ -397,13 +396,12 @@ price_data |> ggplot(aes(x = `Date`, y = `Tyrese Haliburton`)) +
 
 ```{r}
 #| label: fig-3
-#| fig-cap: The comparision between past season versus predicted improving season
-#| fig-subcap: ["Amount of Power Plays", "Effectiveness of Power Plays"]
+#| fig-cap: The comparision between past season versus predicted improving season of Anthony Edward
+#| fig-subcap: ["Model Predicted Price", "Price from 2022-2024 season"]
 #| echo: false
 #| warning: false
 #| layout-ncol: 2
 
-library(ggplot2)
 
 anthony_prediction_table |> ggplot(aes(x = `Month`, y = `Predicted Price`)) + 
   geom_line(group =1) +
@@ -413,15 +411,13 @@ anthony_prediction_table |> ggplot(aes(x = `Month`, y = `Predicted Price`)) +
     x = "Dates",
     y = "Price"
     
-  )+ 
-  geom_point() +
-  geom_smooth(method=lm)
+  )
 
 price_data |> ggplot(aes(x = `Date`, y = `Anthony Edward`)) + 
   geom_line(group = 1) +
   theme(axis.text.x = element_text(angle = 45, vjust = 0.9, hjust=1)) +
   labs(
-    title = "Predicted price of future seasons with improving performance",
+    title = "Price from 2022-2024 season",
     x = "Dates",
     y = "Price"
     
@@ -430,7 +426,7 @@ price_data |> ggplot(aes(x = `Date`, y = `Anthony Edward`)) +
 
 ```
 
-
+In @fig-1, @fig-2, and @fig-3 the results are all very similar. The over all price has a downward trend initially without the use of the model. However, in the start of the 2023 season, all three players card price saw an upward trend with then later died down again falling into another downward trend. This could be because if people coming back to the sport also bringing more attention to playing cards ultimately leading to increase in the price. When the month jumps from April to October, a price increase can be observed, which indicates an end of a season to the start of the next season. The predicted price interestingly displayed an increase at the beginning of each season and decreasing of price after around December of each season. 
 
 # Discussion
 
@@ -441,14 +437,14 @@ The player's performance does not have too much of a prediction factor in the pr
 ## Confounding variables
 The linear model may be too simple due to each player's positions and playstyles. Because we are assuming that the higher the statistics are the better a player is performing. However, basketball is not only about statistics. If a player is known and in charge of defensive plays, their blocks and rebounds may be more important compared to attack-oriented players. The behavior of a player outside the league is also very crucial in terms of this. Even though Ja Morant played well in the league, he had multiple occasions where he displayed illegal objects during his livestream on Instagram. This devastated his reputation overall and he also received game restrictions as punishment. His card price also plummeted from around 2000 to now at around 400 dollars.
 
-## Third discussion point
+## Season timing
+After taking a closer look at trends from both predicted and past data, an interesting point came up mind. When observing turning points of the price, they all seems to be the start and end of a season. Price increasing trends tends to happen at the start of each season, and then become more and more unpredictable throughout the season. This brings attention to the timing of the season and the price may be quite related and even more than the player statistics. Because despite implementing an increasing performance for each of the player statistics to run the model on, there are no clear signs of increasing price overall. The thing that stood out the most is the price increase at the start of every season in October. This could suggest that the initial hype of a new season could be contrbuting to the incresae of the card price.
 
 ## Weaknesses and next steps
 
-Since there isn’t a major platform that provides the tracking of every transaction of a card, it is very difficult to obtain the true price of the card. Sportscardpro only gathers its data from completed transactions of that card on eBay, which is only a portion of the sales that happen on the internet. Transactions of the card that often happen offline in stores are also not tracked, if I sold a card to my friend for a cheaper price, it is not reflected in the dataset from Sportscardpro. 
+Since there isn’t a major platform that provides the tracking of every transaction of a card, it is very difficult to obtain the true price of the card. Sportscardpro only gathers its data from completed transactions of that card on eBay, which is only a portion of the sales that happen on the internet. Transactions of the card that often happen offline in stores are also not tracked, if I sold a card to my friend for a cheaper price, it is not reflected in the data set from @Sportscardpro. 
 
 Future steps would include categorizing each player based on their positions and giving weight to the statistics that would have a better indication of their performance. For example, giving more weight to the average number of blocks per game for defensive players. Another step would be the incorporation of other models to find better fits, because of the complex relationship between the price and the player statistics, a more sophisticated model may be needed. 
-
 
 
 
@@ -461,11 +457,11 @@ Future steps would include categorizing each player based on their positions and
 ## Model Check
 
 ```{r}
-#| include: true
-#| eval: true
+#| label: fig-4
+#| fig-cap: Model fit of Tyrese Maxey
 #| echo: false
-#| message: false
 #| warning: false
+#| layout-ncol: 2
 
 
 pp_check(maxey_model) +
@@ -477,6 +473,14 @@ posterior_vs_prior(maxey_model) +
   scale_color_brewer(palette = "Set1") +
   theme(legend.position = "bottom") +
   coord_flip()
+```
+```{r}
+#| label: fig-5
+#| fig-cap: Model fit of Tyrese Haliburton
+#| echo: false
+#| warning: false
+#| layout-ncol: 2
+
 
 pp_check(haliburton_model) +
   theme_classic() +
@@ -487,6 +491,15 @@ posterior_vs_prior(haliburton_model) +
   scale_color_brewer(palette = "Set1") +
   theme(legend.position = "bottom") +
   coord_flip()
+```
+
+```{r}
+#| label: fig-6
+#| fig-cap: Model fit of Anthony Edward
+#| echo: false
+#| warning: false
+#| layout-ncol: 2
+
 
 pp_check(anthony_model) +
   theme_classic() +
